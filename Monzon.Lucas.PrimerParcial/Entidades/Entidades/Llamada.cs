@@ -89,24 +89,23 @@ namespace Biblioteca.Entidades
 
         public override float CostoDeUso()
         {
-            float pago = 0;
             float segundosQueSonMinutos;
             switch (this.TipoLlamada)
             {
                 case Enum.TipoLlamada.Local:
                     segundosQueSonMinutos = (float)(this.Fin - this.Inicio).TotalSeconds;
-                    pago = (float)(segundosQueSonMinutos * 1.00);
+                    this.pago = (float)(segundosQueSonMinutos * 1.00);
                     break;
                 case Enum.TipoLlamada.Larga_Distancia:
                     segundosQueSonMinutos = (float)(this.Fin - this.Inicio).TotalSeconds;
-                    pago = (float)(segundosQueSonMinutos * 2.50);
+                    this.pago = (float)(segundosQueSonMinutos * 2.50);
                     break;
                 case Enum.TipoLlamada.Internacional:
                     segundosQueSonMinutos = (float)(this.Fin - this.Inicio).TotalSeconds;
-                    pago = (float)(segundosQueSonMinutos * 5.00);
+                    this.pago = (float)(segundosQueSonMinutos * 5.00);
                     break;
             }
-            return pago;
+            return this.pago;
         }
     }
 }

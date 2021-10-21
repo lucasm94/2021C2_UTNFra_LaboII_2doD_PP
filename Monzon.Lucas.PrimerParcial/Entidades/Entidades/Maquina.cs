@@ -78,16 +78,15 @@ namespace Biblioteca.Entidades
 
         public override float CostoDeUso()
         {
-            float pago;
             // Todo calcular costoDeUso del alquiler de una maquina
             if (tiempoReserva.Equals("Libre"))
             {
-                pago = 0.50F;
+                this.pago = 0.50F;
             } else
             {
-                pago = 0;
+                this.pago = 0;
             }
-            return pago;
+            return this.pago;
         }
     }
 }

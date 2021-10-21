@@ -61,6 +61,14 @@ namespace Biblioteca
             }
         }
 
+        public float Recaudacion
+        {
+            get
+            {
+                return this.pago;
+            }
+        }
+
         private string GenerarId()
         {
             int random = new Random().Next();

@@ -1,4 +1,5 @@
 ﻿using Biblioteca.Entidades;
+using Biblioteca.Servicios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,20 +67,64 @@ namespace Biblioteca
             return softwaresPedidos;
         }
 
-        public List<Computadora> Computadoras
+        public List<Computadora> Computadoras(string busqueda)
         {
-            get
+            List<Computadora> computadoras = new List<Computadora>();
+            switch (busqueda)
             {
-                return this.computadoras;
+                case Constantes.EN_USO:
+                    foreach (Computadora computadora in this.computadoras)
+                    {
+                        if (computadora.EnUso)
+                        {
+                            computadoras.Add(computadora);
+                        }
+                    }
+                    break;
+                case Constantes.LIBRES:
+                    foreach (Computadora computadora in this.computadoras)
+                    {
+                        if (!computadora.EnUso)
+                        {
+                            computadoras.Add(computadora);
+                        }
+                    }
+                    break;
+                default:
+                    computadoras = this.computadoras;
+                    break;
             }
-        }
+            return computadoras;
+        } 
 
-        public List<Telefono> Telefonos
+        public List<Telefono> Telefonos(string busqueda)
         {
-            get
+            List<Telefono> telefonos = new List<Telefono>();
+            switch (busqueda)
             {
-                return this.telefonos;
+                case Constantes.EN_USO:
+                    foreach (Telefono telefono in this.telefonos)
+                    {
+                        if (telefono.EnUso)
+                        {
+                            telefonos.Add(telefono);
+                        }
+                    }
+                    break;
+                case Constantes.LIBRES:
+                    foreach (Telefono telefono in this.telefonos)
+                    {
+                        if (!telefono.EnUso)
+                        {
+                            telefonos.Add(telefono);
+                        }
+                    }
+                    break;
+                default:
+                    telefonos = this.telefonos;
+                    break;
             }
+            return telefonos;
         }
 
         public List<Cliente> ClientesAtendidos
@@ -127,7 +172,7 @@ namespace Biblioteca
             Enum.TipoLlamada tipo = ObtenerTipoLlamada(nroTelefono);
             Llamada llamada = new Llamada(idTelefono, nroTelefono, tipo, dniCliente, new DateTime());
             ClienteEnEsperaACLienteAtendido(dniCliente);
-            ActualizarEstadoDispositivo(idTelefono, true, 0, 0);
+            ActualizarEstadoDispositivo(idTelefono, true, 0);
             Llamadas.Add(llamada);
         }
 
@@ -172,42 +217,34 @@ namespace Biblioteca
         {
             Maquina maquina = new Maquina(idComputadora, tiempoReserva, dniCliente, new DateTime());
             ClienteEnEsperaACLienteAtendido(dniCliente);
-            ActualizarEstadoDispositivo(idComputadora, true, 0, 0);
+            ActualizarEstadoDispositivo(idComputadora, true, 0);
             Maquinas.Add(maquina);
         }
 
-        private void ActualizarEstadoDispositivo(string idDispositivo, bool enUso, float pago, int minutos)
+        private void ActualizarEstadoDispositivo(string idDispositivo, bool enUso, int minutos)
         {
             int i = 0;
             if (idDispositivo.ElementAt(0) == 'T')
             {
-                while (i < Telefonos.Count && Telefonos[i].Id != idDispositivo) { }
+                while (i < this.telefonos.Count && this.telefonos[i].Id != idDispositivo) { }
                 {
                     i++;
                 }
-                Telefonos[i].EnUso = enUso;
-                if (pago > 0)
-                {
-                    Telefonos[i].Ganancias += pago;
-                }
+                this.telefonos[i].EnUso = enUso;
                 if (minutos > 0)
                 {
-                    Telefonos[i].MinutosDeUsoTotales += minutos;
+                    this.telefonos[i].MinutosDeUsoTotales += minutos;
                 }
             } else
             {
-                while (i < Computadoras.Count && Telefonos[i].Id != idDispositivo) { }
+                while (i < this.computadoras.Count && this.telefonos[i].Id != idDispositivo) { }
                 {
                     i++;
                 }
-                Computadoras[i].EnUso = enUso;
-                if (pago > 0)
-                {
-                    Computadoras[i].Ganancias += pago;
-                }
+                this.computadoras[i].EnUso = enUso;
                 if (minutos > 0)
                 {
-                    Computadoras[i].MinutosDeUsoTotales += minutos;
+                    this.computadoras[i].MinutosDeUsoTotales += minutos;
                 }
             }
         }
@@ -218,13 +255,13 @@ namespace Biblioteca
             servicio.Fin = new DateTime();
             float pago = servicio.CostoDeUso();
             int minutosUso = (int)(servicio.Fin - servicio.Inicio).TotalMinutes;
-            ActualizarEstadoDispositivo(idDispositivo, false, pago, minutosUso);
+            ActualizarEstadoDispositivo(idDispositivo, false, minutosUso);
             return pago;
         }
 
         private Servicio ObtenerServicioPorIdDispositivo(string idServicio, string idDispositivo)
         {
-            if (idDispositivo.ElementAt(0) == 'T')
+            if (idDispositivo.ElementAt(0) == Constantes.PRIMER_CARACTER_ID_TELEFONO)
             {
                 int i = 0;
                 while(i < Llamadas.Count && idServicio != Llamadas[i].Id)
@@ -244,6 +281,113 @@ namespace Biblioteca
             }
         }
 
+        public List<Computadora> ComputadorasOrdenadasMinDeUsoDesc()
+        {
+            return this.computadoras.OrderByDescending(c => c.MinutosDeUsoTotales).ToList();
+        }
+
+        public List<Telefono> TelefonosOrdenadosMinDeUsoDesc()
+        {
+            return this.telefonos.OrderByDescending(c => c.MinutosDeUsoTotales).ToList();
+        }
+
+        public float GananciasTotalesPorServicio(string servicio)
+        {
+            float ganancias = 0f;
+            if (servicio.Equals(Constantes.CABINA))
+            {
+                foreach (Llamada llamada in this.llamadas)
+                {
+                    ganancias += llamada.Recaudacion;
+                }
+            } else
+            {
+                foreach (Maquina maquina in this.maquinas)
+                {
+                    ganancias += maquina.Recaudacion;
+                }
+            }
+            return ganancias;
+        }
+
+        public int HorasTotalesPorTipoLlamada(Enum.TipoLlamada tipo)
+        {
+            int horasTotales = 0;
+            switch (tipo)
+            {
+                case Enum.TipoLlamada.Local:
+                    horasTotales = HorasPorTipoDeLLamada(Enum.TipoLlamada.Local);
+                    break;
+                case Enum.TipoLlamada.Larga_Distancia:
+                    horasTotales = HorasPorTipoDeLLamada(Enum.TipoLlamada.Larga_Distancia);
+                    break;
+                case Enum.TipoLlamada.Internacional:
+                    horasTotales = HorasPorTipoDeLLamada(Enum.TipoLlamada.Internacional);
+                    break;
+            }
+            return horasTotales;
+        }
+
+        private int HorasPorTipoDeLLamada(Enum.TipoLlamada tipo)
+        {
+            int horasTotales = 0;
+            foreach (Llamada llamada in this.llamadas)
+            {
+                if (llamada.TipoLlamada.Equals(tipo))
+                {
+                    int horas = (int)(llamada.Fin - llamada.Inicio).TotalHours;
+                    horasTotales += horas;
+                }
+            }
+            return horasTotales;
+        }
+
+        public float RecaudacionTotalPorTipoLlamada(Enum.TipoLlamada tipo)
+        {
+            float recaudacionTotal = 0f;
+            switch (tipo)
+            {
+                case Enum.TipoLlamada.Local:
+                    recaudacionTotal = RecaudacionPorTipoDeLLamada(Enum.TipoLlamada.Local);
+                    break;
+                case Enum.TipoLlamada.Larga_Distancia:
+                    recaudacionTotal = RecaudacionPorTipoDeLLamada(Enum.TipoLlamada.Larga_Distancia);
+                    break;
+                case Enum.TipoLlamada.Internacional:
+                    recaudacionTotal = RecaudacionPorTipoDeLLamada(Enum.TipoLlamada.Internacional);
+                    break;
+            }
+            return recaudacionTotal;
+        }
+
+        private float RecaudacionPorTipoDeLLamada(Enum.TipoLlamada tipo)
+        {
+            float reacudacionTotal = 0;
+            foreach (Llamada llamada in this.llamadas)
+            {
+                if (llamada.TipoLlamada.Equals(tipo))
+                {
+                    reacudacionTotal += llamada.Recaudacion;
+                }
+            }
+            return reacudacionTotal;
+        }
+
+        public string SoftwareMasPedidos()
+        {
+            return this.softwaresPedidos.Max().Key.ToString();
+        }
+
+        public string PerifericoMasPedidos()
+        {
+            return this.perifericosPedidos.Max().Key.ToString();
+        }
+
+        public string JuegoMasPedidos()
+        {
+            return this.juegosPedidos.Max().Key.ToString();
+        }
+
         public void CopiarJuegoACd(Enum.Juego juego, int cantidad)
         {
             int ganancia = (int)(cantidad * 1.25);
@@ -251,21 +395,30 @@ namespace Biblioteca
             {
                 copiaJuegos[juego].Cantidad += cantidad;
                 copiaJuegos[juego].Ganancia += ganancia;
-            } else
+            }
+            else
             {
                 copiaJuegos.Add(juego, new Copia(cantidad, ganancia));
             }
         }
-        
-        // Todo implementar ganancias totales por copias
-        public int ObtenerGananciasPorCopias()
+
+        public float ObtenerGananciasPorCopiasRealizadas()
         {
-            return 0;
+            float ganancias = 0f;
+            foreach (KeyValuePair<Enum.Juego, Copia> item in this.copiaJuegos)
+            {
+                ganancias += item.Value.Ganancia;
+            }
+            return ganancias;
         }
 
-        public int ObtenerGananciasDeCopiasPorJuego(Enum.Juego juego)
+        public Copia ObtenerInfoDeCopiaDeUnJuego(Enum.Juego juego)
         {
-            return 0;
+            if (this.copiaJuegos[juego] != null)
+            {
+                return this.copiaJuegos[juego];
+            }
+            return new Copia(0, 0);
         }
 
     }
