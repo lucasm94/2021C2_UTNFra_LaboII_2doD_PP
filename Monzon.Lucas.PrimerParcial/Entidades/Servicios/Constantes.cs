@@ -10,7 +10,12 @@ namespace Biblioteca.Servicios
     {
         public const string EN_USO = "EnUso";
         public const string LIBRES = "Libres";
+        public const string TODO = "Todos";
         public const string CABINA = "Cabina";
         public const char PRIMER_CARACTER_ID_TELEFONO = 'T';
+        public const string COMPUTADORA = "Computadora";
+        public const string TELEFONO = "Telefono";
+        public const string ATENDIDO = "Atendido";
+        public const string ESPERANDO = "Esperando";
     }
 }

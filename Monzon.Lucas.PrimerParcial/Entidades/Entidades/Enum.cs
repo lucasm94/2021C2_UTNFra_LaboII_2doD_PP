@@ -19,5 +19,6 @@ namespace Biblioteca
         public enum DiscoDuro { Gb_10, Gb_20 };
         public enum PlacaDeVideo { GeForce2_MX_100, GeForce2_PRO, GeForce2_Ti };
         public enum Ram { Mb_128, Mb_64, Mb_32 };
+        public enum TiempoReserva { MediaHora, UnaHora, Libre}
     }
 }

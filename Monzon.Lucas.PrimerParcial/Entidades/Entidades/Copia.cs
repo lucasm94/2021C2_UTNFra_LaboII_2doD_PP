@@ -9,9 +9,14 @@ namespace Biblioteca.Entidades
     public class Copia
     {
         private int cantidad;
-        private int ganancia;
+        private float ganancia;
 
-        public Copia(int cantidad, int ganancia)
+        public Copia() : this(0, 0)
+        {
+
+        }
+
+        public Copia(int cantidad, float ganancia)
         {
             this.cantidad = cantidad;
             this.ganancia = ganancia;
@@ -29,7 +34,7 @@ namespace Biblioteca.Entidades
             }
         }
 
-        public int Ganancia
+        public float Ganancia
         {
             get
             {

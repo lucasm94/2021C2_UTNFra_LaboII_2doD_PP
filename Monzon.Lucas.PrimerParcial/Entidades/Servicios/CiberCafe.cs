@@ -20,6 +20,7 @@ namespace Biblioteca
         private Dictionary<Enum.Periferico, int> perifericosPedidos;
         private Dictionary<Enum.Juego, int> juegosPedidos;
         private Dictionary<Enum.Juego, Copia> copiaJuegos;
+        private float gananciasPorCopias;
 
         public CiberCafe()
         {
@@ -33,6 +34,7 @@ namespace Biblioteca
             this.perifericosPedidos = InicializarPerifericosPedidos();
             this.juegosPedidos = InicializarJuegosPedidos();
             this.copiaJuegos = new Dictionary<Enum.Juego, Copia>();
+            this.gananciasPorCopias = 0;
         }
 
         private Dictionary<Enum.Juego, int> InicializarJuegosPedidos()
@@ -167,13 +169,21 @@ namespace Biblioteca
             }
         }
 
-        public void AsignarCabina(int dniCliente, string idTelefono, string nroTelefono)
+        public void Asignar(int dniCliente, string idTelefono, string nroTelefono)
         {
             Enum.TipoLlamada tipo = ObtenerTipoLlamada(nroTelefono);
             Llamada llamada = new Llamada(idTelefono, nroTelefono, tipo, dniCliente, new DateTime());
             ClienteEnEsperaACLienteAtendido(dniCliente);
             ActualizarEstadoDispositivo(idTelefono, true, 0);
             Llamadas.Add(llamada);
+        }
+
+        public void Asignar(int dniCliente, string idComputadora, Enum.TiempoReserva tiempoReserva)
+        {
+            Maquina maquina = new Maquina(idComputadora, tiempoReserva, dniCliente, new DateTime());
+            ClienteEnEsperaACLienteAtendido(dniCliente);
+            ActualizarEstadoDispositivo(idComputadora, true, 0);
+            Maquinas.Add(maquina);
         }
 
         private int ObtenerIndiceClienteEnEspera(int dniCliente)
@@ -211,14 +221,6 @@ namespace Biblioteca
                 tipo = Enum.TipoLlamada.Local;
             }
             return tipo;
-        }
-
-        public void AsignarMaquina(int dniCliente, string idComputadora, string tiempoReserva)
-        {
-            Maquina maquina = new Maquina(idComputadora, tiempoReserva, dniCliente, new DateTime());
-            ClienteEnEsperaACLienteAtendido(dniCliente);
-            ActualizarEstadoDispositivo(idComputadora, true, 0);
-            Maquinas.Add(maquina);
         }
 
         private void ActualizarEstadoDispositivo(string idDispositivo, bool enUso, int minutos)
@@ -390,7 +392,7 @@ namespace Biblioteca
 
         public void CopiarJuegoACd(Enum.Juego juego, int cantidad)
         {
-            int ganancia = (int)(cantidad * 1.25);
+            float ganancia = (float)(cantidad * 1.25);
             if (copiaJuegos.ContainsKey(juego))
             {
                 copiaJuegos[juego].Cantidad += cantidad;
@@ -400,16 +402,12 @@ namespace Biblioteca
             {
                 copiaJuegos.Add(juego, new Copia(cantidad, ganancia));
             }
+            this.gananciasPorCopias += ganancia;
         }
 
         public float ObtenerGananciasPorCopiasRealizadas()
         {
-            float ganancias = 0f;
-            foreach (KeyValuePair<Enum.Juego, Copia> item in this.copiaJuegos)
-            {
-                ganancias += item.Value.Ganancia;
-            }
-            return ganancias;
+            return this.gananciasPorCopias;
         }
 
         public Copia ObtenerInfoDeCopiaDeUnJuego(Enum.Juego juego)
@@ -418,7 +416,7 @@ namespace Biblioteca
             {
                 return this.copiaJuegos[juego];
             }
-            return new Copia(0, 0);
+            return new Copia();
         }
 
     }

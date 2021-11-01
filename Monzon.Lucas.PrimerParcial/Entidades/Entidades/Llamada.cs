@@ -34,6 +34,10 @@ namespace Biblioteca.Entidades
             {
                 return this.nroTelefonoDestino;
             }
+            set
+            {
+                this.nroTelefonoDestino = value;
+            }
         }
 
         public Enum.TipoLlamada TipoLlamada
@@ -41,6 +45,10 @@ namespace Biblioteca.Entidades
             get
             {
                 return this.tipoLlamada;
+            }
+            set
+            {
+                this.tipoLlamada = value;
             }
         }
 

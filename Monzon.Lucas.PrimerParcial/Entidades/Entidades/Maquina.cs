@@ -9,10 +9,10 @@ namespace Biblioteca.Entidades
     public sealed class Maquina : Servicio
     {
         private string idComputadora;
-        private string tiempoReserva;
+        private Enum.TiempoReserva tiempoReserva;
 
-        public Maquina(string idComputadora, string tiempoReserva, int dniCliente, DateTime inicio) 
-            : base(dniCliente, inicio)
+        public Maquina(string idComputadora, Enum.TiempoReserva tiempoReserva, int dniCliente, 
+            DateTime inicio) : base(dniCliente, inicio)
         {
             this.idComputadora = idComputadora;
             this.tiempoReserva = tiempoReserva;
@@ -26,7 +26,7 @@ namespace Biblioteca.Entidades
             }
         }
 
-        public string TiempoReserva
+        public Enum.TiempoReserva TiempoReserva
         {
             get
             {
