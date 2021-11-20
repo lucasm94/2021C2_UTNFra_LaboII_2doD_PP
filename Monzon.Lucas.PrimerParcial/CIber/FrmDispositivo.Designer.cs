@@ -29,47 +29,15 @@ namespace CIber
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblUsuario = new System.Windows.Forms.Label();
-            this.lblFecha = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
             this.cmbDispositivos = new System.Windows.Forms.ComboBox();
             this.dgvDispositivos = new System.Windows.Forms.DataGridView();
             this.cmbUsoDispositivo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.tltComputadora = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDispositivos)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblUsuario
-            // 
-            this.lblUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Location = new System.Drawing.Point(550, 433);
-            this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(126, 25);
-            this.lblUsuario.TabIndex = 5;
-            this.lblUsuario.Text = "Lucas Monzon";
-            // 
-            // lblFecha
-            // 
-            this.lblFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblFecha.AutoSize = true;
-            this.lblFecha.Location = new System.Drawing.Point(682, 433);
-            this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(106, 25);
-            this.lblFecha.TabIndex = 4;
-            this.lblFecha.Text = "26/10/2021";
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(12, 424);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(112, 34);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Volver";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // cmbDispositivos
             // 
@@ -99,8 +67,10 @@ namespace CIber
             this.dgvDispositivos.RowHeadersWidth = 62;
             this.dgvDispositivos.RowTemplate.Height = 33;
             this.dgvDispositivos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDispositivos.Size = new System.Drawing.Size(775, 367);
+            this.dgvDispositivos.ShowCellToolTips = false;
+            this.dgvDispositivos.Size = new System.Drawing.Size(775, 351);
             this.dgvDispositivos.TabIndex = 9;
+            this.dgvDispositivos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDispositivos_CellClick);
             // 
             // cmbUsoDispositivo
             // 
@@ -134,19 +104,21 @@ namespace CIber
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 462);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbUsoDispositivo);
             this.Controls.Add(this.dgvDispositivos);
             this.Controls.Add(this.cmbDispositivos);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.lblUsuario);
-            this.Controls.Add(this.lblFecha);
             this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "FrmDispositivos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ciber Cafe - Dispositivos";
+            this.Controls.SetChildIndex(this.cmbDispositivos, 0);
+            this.Controls.SetChildIndex(this.dgvDispositivos, 0);
+            this.Controls.SetChildIndex(this.cmbUsoDispositivo, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.label2, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDispositivos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -154,14 +126,12 @@ namespace CIber
         }
 
         #endregion
-        private System.Windows.Forms.Label lblUsuario;
-        private System.Windows.Forms.Label lblFecha;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox cmbDispositivos;
         private System.Windows.Forms.DataGridView dgvDispositivos;
         private System.Windows.Forms.ComboBox cmbUsoDispositivo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolTip tltComputadora;
     }
 }
 

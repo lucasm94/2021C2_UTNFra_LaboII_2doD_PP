@@ -35,11 +35,8 @@ namespace CIber
             this.btnEstadisticasMenu = new System.Windows.Forms.Button();
             this.btnClientesMenu = new System.Windows.Forms.Button();
             this.btnDispositivosMenu = new System.Windows.Forms.Button();
-            this.lblMenuUsuario = new System.Windows.Forms.Label();
-            this.lblMenuFecha = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.spcMenu)).BeginInit();
             this.spcMenu.Panel1.SuspendLayout();
-            this.spcMenu.Panel2.SuspendLayout();
             this.spcMenu.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -56,11 +53,6 @@ namespace CIber
             // spcMenu.Panel1
             // 
             this.spcMenu.Panel1.Controls.Add(this.tableLayoutPanel1);
-            // 
-            // spcMenu.Panel2
-            // 
-            this.spcMenu.Panel2.Controls.Add(this.lblMenuUsuario);
-            this.spcMenu.Panel2.Controls.Add(this.lblMenuFecha);
             this.spcMenu.Size = new System.Drawing.Size(800, 450);
             this.spcMenu.SplitterDistance = 409;
             this.spcMenu.TabIndex = 0;
@@ -126,26 +118,6 @@ namespace CIber
             this.btnDispositivosMenu.UseVisualStyleBackColor = true;
             this.btnDispositivosMenu.Click += new System.EventHandler(this.btnDispositivosMenu_Click);
             // 
-            // lblMenuUsuario
-            // 
-            this.lblMenuUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMenuUsuario.AutoSize = true;
-            this.lblMenuUsuario.Location = new System.Drawing.Point(552, 6);
-            this.lblMenuUsuario.Name = "lblMenuUsuario";
-            this.lblMenuUsuario.Size = new System.Drawing.Size(126, 25);
-            this.lblMenuUsuario.TabIndex = 5;
-            this.lblMenuUsuario.Text = "Lucas Monzon";
-            // 
-            // lblMenuFecha
-            // 
-            this.lblMenuFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMenuFecha.AutoSize = true;
-            this.lblMenuFecha.Location = new System.Drawing.Point(684, 6);
-            this.lblMenuFecha.Name = "lblMenuFecha";
-            this.lblMenuFecha.Size = new System.Drawing.Size(106, 25);
-            this.lblMenuFecha.TabIndex = 4;
-            this.lblMenuFecha.Text = "26/10/2021";
-            // 
             // FrmMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -157,8 +129,6 @@ namespace CIber
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ciber Cafe Menu";
             this.spcMenu.Panel1.ResumeLayout(false);
-            this.spcMenu.Panel2.ResumeLayout(false);
-            this.spcMenu.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spcMenu)).EndInit();
             this.spcMenu.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -169,8 +139,6 @@ namespace CIber
         #endregion
 
         private System.Windows.Forms.SplitContainer spcMenu;
-        private System.Windows.Forms.Label lblMenuUsuario;
-        private System.Windows.Forms.Label lblMenuFecha;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Button btnCopiasMenu;
         private System.Windows.Forms.Button btnEstadisticasMenu;

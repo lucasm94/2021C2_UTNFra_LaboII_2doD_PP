@@ -70,10 +70,9 @@ namespace Biblioteca
             return base.GetHashCode();
         }
 
-        public override string ToString()
+        public string QueNecesita()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine(base.ToString());
             sb.AppendLine("Necesita: ");
             foreach (string tipo in necesita.Keys)
             {
@@ -83,6 +82,14 @@ namespace Biblioteca
                     sb.AppendLine(value);
                 }
             }
+            return sb.ToString();
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(base.ToString());
+            sb.AppendLine(QueNecesita());
             return sb.ToString();
         }
     }

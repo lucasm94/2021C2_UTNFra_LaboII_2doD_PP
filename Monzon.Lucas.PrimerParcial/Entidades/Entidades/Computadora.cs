@@ -135,17 +135,17 @@ namespace Biblioteca
             sb.AppendLine("Softwares: ");
             foreach (Enum.Software software in this.softwares)
             {
-                sb.AppendLine(software.ToString());
+                sb.AppendFormat($"{software.ToString()} - ");
             }
-            sb.AppendLine("Perifericos: ");
+            sb.AppendLine("\nPerifericos: ");
             foreach (Enum.Periferico periferico in this.perifericos)
             {
-                sb.AppendLine(periferico.ToString());
+                sb.AppendFormat($"{periferico.ToString()} - ");
             }
-            sb.AppendLine("Juegos: ");
+            sb.AppendLine("\nJuegos: ");
             foreach (Enum.Juego juego in this.juegos)
             {
-                sb.AppendLine(juego.ToString());
+                sb.AppendFormat($"{juego.ToString()} - ");
             }
             sb.AppendFormat(this.hardware.ToString());
             return sb.ToString();

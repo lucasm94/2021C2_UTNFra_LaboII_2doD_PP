@@ -12,17 +12,15 @@ using System.Windows.Forms;
 
 namespace CIber
 {
-    public partial class FrmDispositivos : Form
+    public partial class FrmDispositivos : FrmBase
     {
         private List<string> headersComputadoras;
         private List<string> headersTelefonos;
-        private CiberCafe ciberCafe;
         private DataTable dataTable;
 
-        public FrmDispositivos(CiberCafe ciberCafe)
+        public FrmDispositivos()
         {
             InitializeComponent();
-            this.ciberCafe = ciberCafe;
             this.headersComputadoras = new List<string>() { "ID", "En Uso", "Procesador", "Ram", 
                 "Placa de Video", "Disco Duro" };
             this.headersTelefonos = new List<string>() { "ID", "En Uso", "Tipo", "Marca" };
@@ -93,6 +91,17 @@ namespace CIber
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dgvDispositivos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvDispositivos.Rows.Count > 0 && 
+                this.cmbDispositivos.Text.Equals(Constantes.COMPUTADORA))
+            {
+                this.tltComputadora.SetToolTip(dgvDispositivos,
+                    this.ciberCafe.GetComputadoraPorId(
+                        this.dgvDispositivos.Rows[e.RowIndex].Cells[0].Value.ToString()).ToString());
+            }
         }
     }
 }

@@ -161,6 +161,17 @@ namespace Biblioteca
             }
         }
 
+        public Computadora GetComputadoraPorId(string id)
+        {
+            int i = 0;
+            while (i < this.computadoras.Count && 
+                this.computadoras.ElementAt(i).Id != id)
+            {
+                i++;
+            }
+            return this.computadoras.ElementAt(i);
+        }
+
         public Dictionary<Enum.Juego, Copia> CopiasJuegos
         {
             get
@@ -419,5 +430,9 @@ namespace Biblioteca
             return new Copia();
         }
 
+        public string ServicioQueNecesita(Cliente cliente)
+        {
+            return cliente is ClienteComputadora ? Constantes.COMPUTADORA : Constantes.CABINA;
+        }
     }
 }

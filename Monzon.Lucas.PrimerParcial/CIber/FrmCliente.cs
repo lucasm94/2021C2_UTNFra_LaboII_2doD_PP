@@ -12,20 +12,20 @@ using System.Windows.Forms;
 
 namespace CIber
 {
-    public partial class FrmCliente : Form
+    public partial class FrmCliente : FrmBase
     {
         private List<string> headersClientes;
         private DataTable dataTable;
-        private CiberCafe ciberCafe;
+        private FrmAsignar frmAsignar;
 
-        public FrmCliente(CiberCafe ciberCafe)
+        public FrmCliente()
         {
             InitializeComponent();
-            this.ciberCafe = ciberCafe;
             this.dataTable = new DataTable();
+            this.frmAsignar = new FrmAsignar();
             this.dgvClientes.DataSource = this.dataTable;
             this.headersClientes = new List<string>() { "Dni", "Nombre", "Apellido", "Edad", 
-                "Atendido" };
+                "Atendido", "Servicio" };
             this.cmbEstadoCliente.Items.Add(Constantes.ATENDIDO);
             this.cmbEstadoCliente.Items.Add(Constantes.ESPERANDO);
             foreach (string header in this.headersClientes)
@@ -33,6 +33,7 @@ namespace CIber
                 this.dataTable.Columns.Add(header);
             }
             this.cmbEstadoCliente.SelectedIndex = 0;
+            this.dgvClientes.CancelEdit();
         }
 
         private void btnVolverCliente_Click(object sender, EventArgs e)
@@ -49,20 +50,82 @@ namespace CIber
                 switch (estado)
                 {
                     case Constantes.ATENDIDO:
-                        foreach (Cliente cliente in this.ciberCafe.ClientesAtendidos)
+                        if (this.ciberCafe.ClientesAtendidos.Count > 0)
                         {
-                            this.dataTable.Rows.Add(cliente.Dni, cliente.Apellido, cliente.Nombre, 
-                                cliente.Edad, cliente.Atendido);
+                            foreach (Cliente cliente in this.ciberCafe.ClientesAtendidos)
+                            {
+                                this.dataTable.Rows.Add(cliente.Dni, cliente.Apellido, cliente.Nombre,
+                                    cliente.Edad, cliente.Atendido, this.ciberCafe.ServicioQueNecesita(cliente));
+                            }
+                            this.btnAsignar.Enabled = false;
+                            this.btnLiberar.Enabled = true;
+                        } else
+                        {
+                            this.btnAsignar.Enabled = false;
+                            this.btnLiberar.Enabled = false;
                         }
                         break;
                     case Constantes.ESPERANDO:
-                        foreach (Cliente cliente in this.ciberCafe.ClientesEnEspera)
+                        if (this.ciberCafe.ClientesEnEspera.Count > 0)
                         {
-                            this.dataTable.Rows.Add(cliente.Dni, cliente.Apellido, cliente.Nombre,
-                                cliente.Edad, cliente.Atendido);
+                            foreach (Cliente cliente in this.ciberCafe.ClientesEnEspera)
+                            {
+                                this.dataTable.Rows.Add(cliente.Dni, cliente.Apellido, cliente.Nombre,
+                                    cliente.Edad, cliente.Atendido, this.ciberCafe.ServicioQueNecesita(cliente));
+                            }
+                            this.btnAsignar.Enabled = true;
+                            this.btnLiberar.Enabled = false;
+                        } else
+                        {
+                            this.btnAsignar.Enabled = false;
+                            this.btnLiberar.Enabled = false;
                         }
                         break;
                 }
+            }
+        }
+
+        private void btnAsignar_Click(object sender, EventArgs e)
+        {
+            Cliente cliente = this.ciberCafe.ClientesEnEspera[0];
+            if (cliente is ClienteComputadora && ValidarSiHayDisponibilidad(Constantes.COMPUTADORA))
+            {
+                this.frmAsignar.MostrarCliente(cliente);
+                this.frmAsignar.ShowDialog();
+            }
+            else if (ValidarSiHayDisponibilidad(Constantes.CABINA))
+            {
+                this.frmAsignar.ShowDialog();
+            } else
+            {
+                MessageBox.Show("No hay disponibilidad para el servicio requerido en este momento, primero debe Liberar");
+            }
+        }
+
+        private bool ValidarSiHayDisponibilidad(string servicio)
+        {
+            if (servicio.Equals(Constantes.COMPUTADORA))
+            {
+                return this.ciberCafe.Computadoras(Constantes.LIBRES).Count > 0;
+            } else
+            {
+                return this.ciberCafe.Telefonos(Constantes.LIBRES).Count > 0;
+            }
+        }
+
+        private void btnLiberar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvClientes.Rows.Count > 0 && 
+                this.dgvClientes.Rows[e.RowIndex].Cells[5].Value.ToString()
+                .Equals(Constantes.COMPUTADORA))
+            {
+                this.tltNecesita.SetToolTip(dgvClientes, 
+                    ((ClienteComputadora)this.ciberCafe.ClientesEnEspera[e.RowIndex]).QueNecesita());
             }
         }
     }

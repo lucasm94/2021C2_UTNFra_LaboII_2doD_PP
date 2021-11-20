@@ -29,12 +29,13 @@ namespace CIber
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblEstado = new System.Windows.Forms.Label();
             this.cmbEstadoCliente = new System.Windows.Forms.ComboBox();
             this.dgvClientes = new System.Windows.Forms.DataGridView();
-            this.btnVolverCliente = new System.Windows.Forms.Button();
-            this.lblUsuario = new System.Windows.Forms.Label();
-            this.lblFecha = new System.Windows.Forms.Label();
+            this.btnAsignar = new System.Windows.Forms.Button();
+            this.btnLiberar = new System.Windows.Forms.Button();
+            this.tltNecesita = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,7 +54,7 @@ namespace CIber
             this.cmbEstadoCliente.FormattingEnabled = true;
             this.cmbEstadoCliente.Location = new System.Drawing.Point(85, 6);
             this.cmbEstadoCliente.Name = "cmbEstadoCliente";
-            this.cmbEstadoCliente.Size = new System.Drawing.Size(182, 33);
+            this.cmbEstadoCliente.Size = new System.Drawing.Size(163, 33);
             this.cmbEstadoCliente.TabIndex = 18;
             this.cmbEstadoCliente.SelectedIndexChanged += new System.EventHandler(this.cmbEstadoCliente_SelectedIndexChanged);
             // 
@@ -75,53 +76,53 @@ namespace CIber
             this.dgvClientes.RowHeadersWidth = 62;
             this.dgvClientes.RowTemplate.Height = 33;
             this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClientes.Size = new System.Drawing.Size(775, 367);
+            this.dgvClientes.ShowCellToolTips = false;
+            this.dgvClientes.Size = new System.Drawing.Size(782, 367);
             this.dgvClientes.TabIndex = 17;
+            this.dgvClientes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientes_CellClick);
             // 
-            // btnVolverCliente
+            // btnAsignar
             // 
-            this.btnVolverCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnVolverCliente.Location = new System.Drawing.Point(12, 414);
-            this.btnVolverCliente.Name = "btnVolverCliente";
-            this.btnVolverCliente.Size = new System.Drawing.Size(112, 34);
-            this.btnVolverCliente.TabIndex = 15;
-            this.btnVolverCliente.Text = "Volver";
-            this.btnVolverCliente.UseVisualStyleBackColor = true;
-            this.btnVolverCliente.Click += new System.EventHandler(this.btnVolverCliente_Click);
+            this.btnAsignar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAsignar.Enabled = false;
+            this.btnAsignar.Location = new System.Drawing.Point(557, 4);
+            this.btnAsignar.Name = "btnAsignar";
+            this.btnAsignar.Size = new System.Drawing.Size(112, 34);
+            this.btnAsignar.TabIndex = 21;
+            this.btnAsignar.Text = "Asignar";
+            this.btnAsignar.UseVisualStyleBackColor = true;
+            this.btnAsignar.Click += new System.EventHandler(this.btnAsignar_Click);
             // 
-            // lblUsuario
+            // btnLiberar
             // 
-            this.lblUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Location = new System.Drawing.Point(550, 423);
-            this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(126, 25);
-            this.lblUsuario.TabIndex = 14;
-            this.lblUsuario.Text = "Lucas Monzon";
-            // 
-            // lblFecha
-            // 
-            this.lblFecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblFecha.AutoSize = true;
-            this.lblFecha.Location = new System.Drawing.Point(682, 423);
-            this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(106, 25);
-            this.lblFecha.TabIndex = 13;
-            this.lblFecha.Text = "26/10/2021";
+            this.btnLiberar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLiberar.Enabled = false;
+            this.btnLiberar.Location = new System.Drawing.Point(683, 4);
+            this.btnLiberar.Name = "btnLiberar";
+            this.btnLiberar.Size = new System.Drawing.Size(112, 34);
+            this.btnLiberar.TabIndex = 22;
+            this.btnLiberar.Text = "Liberar";
+            this.btnLiberar.UseVisualStyleBackColor = true;
+            this.btnLiberar.Click += new System.EventHandler(this.btnLiberar_Click);
             // 
             // FrmCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(807, 450);
+            this.Controls.Add(this.btnLiberar);
+            this.Controls.Add(this.btnAsignar);
             this.Controls.Add(this.lblEstado);
             this.Controls.Add(this.cmbEstadoCliente);
             this.Controls.Add(this.dgvClientes);
-            this.Controls.Add(this.btnVolverCliente);
-            this.Controls.Add(this.lblUsuario);
-            this.Controls.Add(this.lblFecha);
             this.Name = "FrmCliente";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ciber Cafe - Clientes";
+            this.Controls.SetChildIndex(this.dgvClientes, 0);
+            this.Controls.SetChildIndex(this.cmbEstadoCliente, 0);
+            this.Controls.SetChildIndex(this.lblEstado, 0);
+            this.Controls.SetChildIndex(this.btnAsignar, 0);
+            this.Controls.SetChildIndex(this.btnLiberar, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -133,8 +134,8 @@ namespace CIber
         private System.Windows.Forms.Label lblEstado;
         private System.Windows.Forms.ComboBox cmbEstadoCliente;
         private System.Windows.Forms.DataGridView dgvClientes;
-        private System.Windows.Forms.Button btnVolverCliente;
-        private System.Windows.Forms.Label lblUsuario;
-        private System.Windows.Forms.Label lblFecha;
+        private System.Windows.Forms.Button btnAsignar;
+        private System.Windows.Forms.Button btnLiberar;
+        private System.Windows.Forms.ToolTip tltNecesita;
     }
 }

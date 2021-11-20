@@ -17,5 +17,9 @@ namespace Biblioteca.Servicios
         public const string TELEFONO = "Telefono";
         public const string ATENDIDO = "Atendido";
         public const string ESPERANDO = "Esperando";
+        public const string PERIFERICOS = "Perifericos";
+        public const string JUEGOS = "Juegos";
+        public const string SOFTWARE = "Software";
+        public const string HARDWARE = "Hardware";
     }
 }

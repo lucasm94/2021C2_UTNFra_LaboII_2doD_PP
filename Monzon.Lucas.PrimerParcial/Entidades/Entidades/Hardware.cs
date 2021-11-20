@@ -107,10 +107,10 @@ namespace Biblioteca
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Hardware: ");
-            sb.AppendFormat($"procesador={this.procesador}");
-            sb.AppendFormat($"ram={this.ram}");
-            sb.AppendFormat($"placaDeVideo={this.placaDeVideo}");
-            sb.AppendFormat($"discoDuro={this.discoDuro}");
+            sb.AppendFormat($"Procesador= {this.procesador} - ");
+            sb.AppendFormat($"Ram= {this.ram} - ");
+            sb.AppendFormat($"PlacaDeVideo= {this.placaDeVideo} - ");
+            sb.AppendFormat($"DiscoDuro= {this.discoDuro}");
             return sb.ToString();
         }
     }

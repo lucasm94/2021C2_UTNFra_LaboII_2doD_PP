@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Biblioteca.Servicios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,17 +12,22 @@ namespace Biblioteca
         public static List<Cliente> ClientesEnEspera()
         {
             List<Cliente> clientes = new List<Cliente>();
-            clientes.Add(new Cliente(12345678, "Primero", "Espera", 14));
-            clientes.Add(new Cliente(12345677, "Segundo", "Espera", 15));
-            clientes.Add(new Cliente(12345675, "Tercero", "Espera", 19));
-            clientes.Add(new Cliente(12348765, "Cuarto", "Espera", 12));
-
             ClienteComputadora clientePc = new ClienteComputadora(12341111, "Septimo", "Espera", 20);
             ClienteComputadora clientePcDos = new ClienteComputadora(12343124, "Octavo", "Espera", 11);
             ClienteComputadora clientePcTres = new ClienteComputadora(12341234, "Quinto", "Espera", 13);
             ClienteComputadora clientePcCuatro = new ClienteComputadora(12344321, "Sexto", "Espera", 16);
 
+            Dictionary<string, List<string>> diccClientePc =new Dictionary<string, List<string>>();
+            diccClientePc.Add(Constantes.PERIFERICOS, new List<string>() { Enum.Periferico.Mouse.ToString() });
+
+            clientePc.Necesita = diccClientePc;
+
             clientes.Add(clientePc);
+            clientes.Add(new Cliente(12345678, "Primero", "Espera", 14));
+            clientes.Add(new Cliente(12345677, "Segundo", "Espera", 15));
+            clientes.Add(new Cliente(12345675, "Tercero", "Espera", 19));
+            clientes.Add(new Cliente(12348765, "Cuarto", "Espera", 12));
+            
             clientes.Add(clientePcDos);
             clientes.Add(clientePcTres);
             clientes.Add(clientePcCuatro);

@@ -12,18 +12,17 @@ using System.Windows.Forms;
 
 namespace CIber
 {
-    public partial class FrmMenu : Form
+    public partial class FrmMenu : FrmBase
     {
-        protected CiberCafe ciberCafe;
         private FrmDispositivos frmDispositivos;
         private FrmCliente frmClientes;
 
         public FrmMenu()
         {
             InitializeComponent();
-            this.ciberCafe = new CiberCafe();
-            this.frmDispositivos = new FrmDispositivos(this.ciberCafe);
-            this.frmClientes = new FrmCliente(this.ciberCafe);
+            this.frmDispositivos = new FrmDispositivos();
+            this.frmClientes = new FrmCliente();
+            this.OcultarButtonVolver();
         }
 
         private void btnDispositivosMenu_Click(object sender, EventArgs e)

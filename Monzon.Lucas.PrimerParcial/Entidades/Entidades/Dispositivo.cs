@@ -67,9 +67,9 @@ namespace Biblioteca
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat($"id={this.id}");
-            sb.AppendFormat($"enUso={this.enUso}");
-            sb.AppendFormat($"minutosDeUsoTotales={this.minutosDeUsoTotales}");
+            sb.AppendFormat($"id= {this.id} - ");
+            sb.AppendFormat($"enUso= {this.enUso} - ");
+            sb.AppendFormat($"minutosDeUsoTotales= {this.minutosDeUsoTotales}\n");
             return sb.ToString();
         }
     }

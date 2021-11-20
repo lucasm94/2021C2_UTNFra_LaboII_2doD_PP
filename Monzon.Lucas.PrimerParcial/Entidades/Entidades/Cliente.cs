@@ -119,11 +119,11 @@ namespace Biblioteca
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Cliente: ");
-            sb.AppendFormat($"dni={this.dni}");
-            sb.AppendFormat($"nombre={this.nombre}");
-            sb.AppendFormat($"apellido={this.apellido}");
-            sb.AppendFormat($"edad={this.edad}");
-            sb.AppendFormat($"atendido={this.atendido}");
+            sb.AppendFormat($"dni={this.dni}\n");
+            sb.AppendFormat($"nombre={this.nombre}\n");
+            sb.AppendFormat($"apellido={this.apellido}\n");
+            sb.AppendFormat($"edad={this.edad}\n");
+            sb.AppendFormat($"atendido={this.atendido}\n");
             return sb.ToString();
         }
 
