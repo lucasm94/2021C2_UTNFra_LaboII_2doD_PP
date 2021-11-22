@@ -90,7 +90,7 @@ namespace CIber
             Cliente cliente = this.ciberCafe.ClientesEnEspera[0];
             if (cliente is ClienteComputadora && ValidarSiHayDisponibilidad(Constantes.COMPUTADORA))
             {
-                this.frmAsignar.MostrarCliente(cliente);
+                this.frmAsignar.CargarYMostrarCliente((ClienteComputadora) cliente);
                 this.frmAsignar.ShowDialog();
             }
             else if (ValidarSiHayDisponibilidad(Constantes.CABINA))

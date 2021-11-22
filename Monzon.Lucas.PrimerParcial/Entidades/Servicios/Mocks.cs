@@ -18,7 +18,8 @@ namespace Biblioteca
             ClienteComputadora clientePcCuatro = new ClienteComputadora(12344321, "Sexto", "Espera", 16);
 
             Dictionary<string, List<string>> diccClientePc =new Dictionary<string, List<string>>();
-            diccClientePc.Add(Constantes.PERIFERICOS, new List<string>() { Enum.Periferico.Mouse.ToString() });
+            diccClientePc.Add(Constantes.PERIFERICOS, new List<string>() { Enum.Periferico.Mouse.ToString(), 
+                Enum.Periferico.Camara.ToString() });
 
             clientePc.Necesita = diccClientePc;
 

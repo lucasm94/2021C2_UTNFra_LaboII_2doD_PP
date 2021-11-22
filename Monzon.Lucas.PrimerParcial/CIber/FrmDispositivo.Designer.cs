@@ -63,6 +63,7 @@ namespace CIber
             this.dgvDispositivos.Location = new System.Drawing.Point(13, 51);
             this.dgvDispositivos.MultiSelect = false;
             this.dgvDispositivos.Name = "dgvDispositivos";
+            this.dgvDispositivos.ReadOnly = true;
             this.dgvDispositivos.RowHeadersVisible = false;
             this.dgvDispositivos.RowHeadersWidth = 62;
             this.dgvDispositivos.RowTemplate.Height = 33;

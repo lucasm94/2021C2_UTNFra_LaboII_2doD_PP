@@ -22,7 +22,7 @@ namespace CIber
             InitializeComponent();
             this.frmDispositivos = new FrmDispositivos();
             this.frmClientes = new FrmCliente();
-            this.OcultarButtonVolver();
+            this.ModificarNombreBotonACerrar();
         }
 
         private void btnDispositivosMenu_Click(object sender, EventArgs e)

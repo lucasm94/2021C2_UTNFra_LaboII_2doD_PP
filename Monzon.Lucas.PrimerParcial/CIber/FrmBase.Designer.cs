@@ -32,6 +32,7 @@ namespace CIber
             this.lblUsuario = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
             this.btnVolverCliente = new System.Windows.Forms.Button();
+            this.btnAyuda = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblUsuario
@@ -65,11 +66,21 @@ namespace CIber
             this.btnVolverCliente.UseVisualStyleBackColor = true;
             this.btnVolverCliente.Click += new System.EventHandler(this.btnVolverCliente_Click);
             // 
+            // btnAyuda
+            // 
+            this.btnAyuda.Location = new System.Drawing.Point(143, 409);
+            this.btnAyuda.Name = "btnAyuda";
+            this.btnAyuda.Size = new System.Drawing.Size(112, 34);
+            this.btnAyuda.TabIndex = 17;
+            this.btnAyuda.Text = "Ayuda";
+            this.btnAyuda.UseVisualStyleBackColor = true;
+            // 
             // FrmBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnAyuda);
             this.Controls.Add(this.btnVolverCliente);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.lblUsuario);
@@ -84,5 +95,6 @@ namespace CIber
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Button btnVolverCliente;
+        private System.Windows.Forms.Button btnAyuda;
     }
 }

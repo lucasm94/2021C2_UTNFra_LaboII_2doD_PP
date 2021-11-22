@@ -26,9 +26,10 @@ namespace CIber
             this.Close();
         }
 
-        protected void OcultarButtonVolver()
+        protected void ModificarNombreBotonACerrar()
         {
-            this.btnVolverCliente.Visible = false;
+            this.btnVolverCliente.Text = "Cerrar";
         }
+
     }
 }

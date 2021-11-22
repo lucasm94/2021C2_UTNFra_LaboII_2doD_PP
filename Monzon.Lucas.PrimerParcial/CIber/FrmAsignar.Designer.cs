@@ -29,9 +29,12 @@ namespace CIber
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.spcAsignar = new System.Windows.Forms.SplitContainer();
             this.rtbCliente = new System.Windows.Forms.RichTextBox();
             this.dgvComputadoras = new System.Windows.Forms.DataGridView();
+            this.tltAsignar = new System.Windows.Forms.ToolTip(this.components);
+            this.btnAsigna = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.spcAsignar)).BeginInit();
             this.spcAsignar.Panel1.SuspendLayout();
             this.spcAsignar.Panel2.SuspendLayout();
@@ -65,6 +68,7 @@ namespace CIber
             this.rtbCliente.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtbCliente.Location = new System.Drawing.Point(0, 0);
             this.rtbCliente.Name = "rtbCliente";
+            this.rtbCliente.ReadOnly = true;
             this.rtbCliente.Size = new System.Drawing.Size(270, 409);
             this.rtbCliente.TabIndex = 0;
             this.rtbCliente.Text = "";
@@ -77,23 +81,39 @@ namespace CIber
             this.dgvComputadoras.Location = new System.Drawing.Point(0, 0);
             this.dgvComputadoras.MultiSelect = false;
             this.dgvComputadoras.Name = "dgvComputadoras";
+            this.dgvComputadoras.ReadOnly = true;
             this.dgvComputadoras.RowHeadersVisible = false;
             this.dgvComputadoras.RowHeadersWidth = 62;
             this.dgvComputadoras.RowTemplate.Height = 33;
             this.dgvComputadoras.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvComputadoras.ShowCellToolTips = false;
             this.dgvComputadoras.Size = new System.Drawing.Size(541, 409);
             this.dgvComputadoras.TabIndex = 0;
+            this.dgvComputadoras.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComputadoras_CellClick);
+            // 
+            // btnAsigna
+            // 
+            this.btnAsigna.Enabled = false;
+            this.btnAsigna.Location = new System.Drawing.Point(286, 414);
+            this.btnAsigna.Name = "btnAsigna";
+            this.btnAsigna.Size = new System.Drawing.Size(112, 33);
+            this.btnAsigna.TabIndex = 18;
+            this.btnAsigna.Text = "Asignar";
+            this.btnAsigna.UseVisualStyleBackColor = true;
+            this.btnAsigna.Click += new System.EventHandler(this.btnAsigna_Click);
             // 
             // FrmAsignar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(839, 459);
+            this.Controls.Add(this.btnAsigna);
             this.Controls.Add(this.spcAsignar);
             this.Name = "FrmAsignar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ciber Cafe - Asignar";
             this.Controls.SetChildIndex(this.spcAsignar, 0);
+            this.Controls.SetChildIndex(this.btnAsigna, 0);
             this.spcAsignar.Panel1.ResumeLayout(false);
             this.spcAsignar.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spcAsignar)).EndInit();
@@ -109,5 +129,7 @@ namespace CIber
         private System.Windows.Forms.SplitContainer spcAsignar;
         private System.Windows.Forms.DataGridView dgvComputadoras;
         private System.Windows.Forms.RichTextBox rtbCliente;
+        private System.Windows.Forms.ToolTip tltAsignar;
+        private System.Windows.Forms.Button btnAsigna;
     }
 }

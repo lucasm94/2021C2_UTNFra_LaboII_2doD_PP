@@ -72,6 +72,7 @@ namespace CIber
             this.dgvClientes.Location = new System.Drawing.Point(13, 41);
             this.dgvClientes.MultiSelect = false;
             this.dgvClientes.Name = "dgvClientes";
+            this.dgvClientes.ReadOnly = true;
             this.dgvClientes.RowHeadersVisible = false;
             this.dgvClientes.RowHeadersWidth = 62;
             this.dgvClientes.RowTemplate.Height = 33;
