@@ -12,15 +12,19 @@ using System.Windows.Forms;
 
 namespace CIber
 {
-    public partial class FrmAsignar : FrmBase
+    public partial class FrmAsignarMaquina : FrmBase
     {
         private List<string> headersComputadoras;
         private DataTable dataTable;
         private ClienteComputadora cliente;
+        private ComboBox estadoCliente;
+        private CiberCafe ciberCafe;
 
-        public FrmAsignar()
+        public FrmAsignarMaquina(CiberCafe ciber, ComboBox estadoCliente)
         {
             InitializeComponent();
+            this.ciberCafe = ciber;
+            this.estadoCliente = estadoCliente;
             this.headersComputadoras = new List<string>() { "ID", "En Uso", "Procesador", "Ram",
                 "Placa de Video", "Disco Duro" };
             this.dataTable = new DataTable();
@@ -38,6 +42,10 @@ namespace CIber
             }
             if (this.dataTable.Rows.Count > 0)
             {
+                this.cmbTiempo.Items.Add(Biblioteca.Enum.TiempoReserva.MediaHora);
+                this.cmbTiempo.Items.Add(Biblioteca.Enum.TiempoReserva.UnaHora);
+                this.cmbTiempo.Items.Add(Biblioteca.Enum.TiempoReserva.Libre);
+                this.cmbTiempo.SelectedIndex = 0;
                 this.btnAsigna.Enabled = true;
             }
         }
@@ -70,6 +78,15 @@ namespace CIber
             if (!CumpleNecesidad(computadoraSelecionada))
             {
                 MessageBox.Show("No cumple con las necesidades requeridas por el cliente");
+            } else
+            {
+                Biblioteca.Enum.TiempoReserva tiempoReserva = (Biblioteca.Enum.TiempoReserva)
+                    System.Enum.Parse(typeof(Biblioteca.Enum.TiempoReserva), this.cmbTiempo.SelectedItem.ToString());
+                this.ciberCafe.Asignar(this.cliente.Dni, computadoraSelecionada.Id, tiempoReserva);
+                MessageBox.Show("Se asigno maquina con exito");
+                this.estadoCliente.SelectedIndex = -1;
+                this.estadoCliente.SelectedIndex = 1;
+                this.Close();
             }
         }
 

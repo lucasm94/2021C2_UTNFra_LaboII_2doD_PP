@@ -29,59 +29,41 @@ namespace CIber
         /// </summary>
         private void InitializeComponent()
         {
-            this.spcMenu = new System.Windows.Forms.SplitContainer();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tlpMenu = new System.Windows.Forms.TableLayoutPanel();
             this.btnCopiasMenu = new System.Windows.Forms.Button();
             this.btnEstadisticasMenu = new System.Windows.Forms.Button();
             this.btnClientesMenu = new System.Windows.Forms.Button();
             this.btnDispositivosMenu = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.spcMenu)).BeginInit();
-            this.spcMenu.Panel1.SuspendLayout();
-            this.spcMenu.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tlpMenu.SuspendLayout();
             this.SuspendLayout();
             // 
-            // spcMenu
+            // tlpMenu
             // 
-            this.spcMenu.Cursor = System.Windows.Forms.Cursors.Default;
-            this.spcMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.spcMenu.IsSplitterFixed = true;
-            this.spcMenu.Location = new System.Drawing.Point(0, 0);
-            this.spcMenu.Name = "spcMenu";
-            this.spcMenu.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // spcMenu.Panel1
-            // 
-            this.spcMenu.Panel1.Controls.Add(this.tableLayoutPanel1);
-            this.spcMenu.Size = new System.Drawing.Size(800, 450);
-            this.spcMenu.SplitterDistance = 409;
-            this.spcMenu.TabIndex = 0;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.btnCopiasMenu, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnEstadisticasMenu, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnClientesMenu, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnDispositivosMenu, 0, 0);
-            this.tableLayoutPanel1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 409);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.tlpMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpMenu.ColumnCount = 2;
+            this.tlpMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.375F));
+            this.tlpMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.625F));
+            this.tlpMenu.Controls.Add(this.btnCopiasMenu, 1, 1);
+            this.tlpMenu.Controls.Add(this.btnEstadisticasMenu, 0, 1);
+            this.tlpMenu.Controls.Add(this.btnClientesMenu, 1, 0);
+            this.tlpMenu.Controls.Add(this.btnDispositivosMenu, 0, 0);
+            this.tlpMenu.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tlpMenu.Location = new System.Drawing.Point(2, 3);
+            this.tlpMenu.Name = "tlpMenu";
+            this.tlpMenu.RowCount = 2;
+            this.tlpMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tlpMenu.Size = new System.Drawing.Size(800, 400);
+            this.tlpMenu.TabIndex = 0;
             // 
             // btnCopiasMenu
             // 
             this.btnCopiasMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnCopiasMenu.Location = new System.Drawing.Point(403, 207);
+            this.btnCopiasMenu.Location = new System.Drawing.Point(406, 203);
             this.btnCopiasMenu.Name = "btnCopiasMenu";
-            this.btnCopiasMenu.Size = new System.Drawing.Size(394, 199);
+            this.btnCopiasMenu.Size = new System.Drawing.Size(391, 194);
             this.btnCopiasMenu.TabIndex = 3;
             this.btnCopiasMenu.Text = "Copias";
             this.btnCopiasMenu.UseVisualStyleBackColor = true;
@@ -89,9 +71,9 @@ namespace CIber
             // btnEstadisticasMenu
             // 
             this.btnEstadisticasMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnEstadisticasMenu.Location = new System.Drawing.Point(3, 207);
+            this.btnEstadisticasMenu.Location = new System.Drawing.Point(3, 203);
             this.btnEstadisticasMenu.Name = "btnEstadisticasMenu";
-            this.btnEstadisticasMenu.Size = new System.Drawing.Size(394, 199);
+            this.btnEstadisticasMenu.Size = new System.Drawing.Size(397, 194);
             this.btnEstadisticasMenu.TabIndex = 2;
             this.btnEstadisticasMenu.Text = "Estadisticas";
             this.btnEstadisticasMenu.UseVisualStyleBackColor = true;
@@ -99,9 +81,9 @@ namespace CIber
             // btnClientesMenu
             // 
             this.btnClientesMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClientesMenu.Location = new System.Drawing.Point(403, 3);
+            this.btnClientesMenu.Location = new System.Drawing.Point(406, 3);
             this.btnClientesMenu.Name = "btnClientesMenu";
-            this.btnClientesMenu.Size = new System.Drawing.Size(394, 198);
+            this.btnClientesMenu.Size = new System.Drawing.Size(391, 194);
             this.btnClientesMenu.TabIndex = 1;
             this.btnClientesMenu.Text = "Clientes";
             this.btnClientesMenu.UseVisualStyleBackColor = true;
@@ -112,7 +94,7 @@ namespace CIber
             this.btnDispositivosMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDispositivosMenu.Location = new System.Drawing.Point(3, 3);
             this.btnDispositivosMenu.Name = "btnDispositivosMenu";
-            this.btnDispositivosMenu.Size = new System.Drawing.Size(394, 198);
+            this.btnDispositivosMenu.Size = new System.Drawing.Size(397, 194);
             this.btnDispositivosMenu.TabIndex = 0;
             this.btnDispositivosMenu.Text = "Dispositivos";
             this.btnDispositivosMenu.UseVisualStyleBackColor = true;
@@ -123,23 +105,21 @@ namespace CIber
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.spcMenu);
-            this.MinimumSize = new System.Drawing.Size(350, 350);
+            this.Controls.Add(this.tlpMenu);
+            this.MinimumSize = new System.Drawing.Size(822, 506);
             this.Name = "FrmMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ciber Cafe Menu";
-            this.spcMenu.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.spcMenu)).EndInit();
-            this.spcMenu.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
+            this.Controls.SetChildIndex(this.tlpMenu, 0);
+            this.tlpMenu.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.SplitContainer spcMenu;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tlpMenu;
         private System.Windows.Forms.Button btnCopiasMenu;
         private System.Windows.Forms.Button btnEstadisticasMenu;
         private System.Windows.Forms.Button btnClientesMenu;

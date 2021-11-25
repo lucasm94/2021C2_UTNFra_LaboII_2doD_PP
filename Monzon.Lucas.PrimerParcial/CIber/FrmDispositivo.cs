@@ -17,10 +17,12 @@ namespace CIber
         private List<string> headersComputadoras;
         private List<string> headersTelefonos;
         private DataTable dataTable;
+        private CiberCafe ciberCafe;
 
-        public FrmDispositivos()
+        public FrmDispositivos(CiberCafe ciber)
         {
             InitializeComponent();
+            this.ciberCafe = ciber;
             this.headersComputadoras = new List<string>() { "ID", "En Uso", "Procesador", "Ram", 
                 "Placa de Video", "Disco Duro" };
             this.headersTelefonos = new List<string>() { "ID", "En Uso", "Tipo", "Marca" };

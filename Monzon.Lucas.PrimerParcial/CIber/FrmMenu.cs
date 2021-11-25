@@ -16,12 +16,14 @@ namespace CIber
     {
         private FrmDispositivos frmDispositivos;
         private FrmCliente frmClientes;
+        private CiberCafe ciberCafe;
 
-        public FrmMenu()
+        public FrmMenu(CiberCafe ciber)
         {
             InitializeComponent();
-            this.frmDispositivos = new FrmDispositivos();
-            this.frmClientes = new FrmCliente();
+            this.ciberCafe = ciber;
+            this.frmDispositivos = new FrmDispositivos(this.ciberCafe);
+            this.frmClientes = new FrmCliente(this.ciberCafe);
             this.ModificarNombreBotonACerrar();
         }
 

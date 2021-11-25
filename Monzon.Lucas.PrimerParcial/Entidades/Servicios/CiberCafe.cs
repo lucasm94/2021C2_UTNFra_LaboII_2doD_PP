@@ -13,6 +13,7 @@ namespace Biblioteca
         private List<Computadora> computadoras;
         private List<Telefono> telefonos;
         private List<Cliente> clientesAtendidos;
+        private List<Cliente> clientesUsandoServicio;
         private List<Cliente> clientesEnEspera;
         private List<Llamada> llamadas;
         private List<Maquina> maquinas;
@@ -27,6 +28,7 @@ namespace Biblioteca
             this.computadoras = Mocks.Computadoras();
             this.telefonos = Mocks.Telefonos();
             this.clientesAtendidos = new List<Cliente>();
+            this.clientesUsandoServicio = new List<Cliente>();
             this.clientesEnEspera = Mocks.ClientesEnEspera();
             this.llamadas = new List<Llamada>();
             this.maquinas = new List<Maquina>();
@@ -71,7 +73,7 @@ namespace Biblioteca
 
         public List<Computadora> Computadoras(string busqueda)
         {
-            List<Computadora> computadoras = new List<Computadora>();
+            List<Computadora> computadorasList = new List<Computadora>();
             switch (busqueda)
             {
                 case Constantes.EN_USO:
@@ -79,7 +81,7 @@ namespace Biblioteca
                     {
                         if (computadora.EnUso)
                         {
-                            computadoras.Add(computadora);
+                            computadorasList.Add(computadora);
                         }
                     }
                     break;
@@ -88,15 +90,15 @@ namespace Biblioteca
                     {
                         if (!computadora.EnUso)
                         {
-                            computadoras.Add(computadora);
+                            computadorasList.Add(computadora);
                         }
                     }
                     break;
                 default:
-                    computadoras = this.computadoras;
+                    computadorasList = this.computadoras;
                     break;
             }
-            return computadoras;
+            return computadorasList;
         } 
 
         public List<Telefono> Telefonos(string busqueda)
@@ -142,6 +144,14 @@ namespace Biblioteca
             get
             {
                 return this.clientesEnEspera;
+            }
+        }
+
+        public List<Cliente> ClientesUsandoServicio
+        {
+            get
+            {
+                return this.clientesUsandoServicio;
             }
         }
 
@@ -213,6 +223,18 @@ namespace Biblioteca
             Cliente cliente = ClientesEnEspera[index];
             cliente.Atendido = true;
             ClientesEnEspera.RemoveAt(index);
+            ClientesUsandoServicio.Add(cliente);
+        }
+
+        private void ClienteUsandoServicioACLienteAtendido(int dniCliente)
+        {
+            int i = 0;
+            while (i < ClientesUsandoServicio.Count && ClientesUsandoServicio[i].Dni != dniCliente)
+            {
+                i++;
+            }
+            Cliente cliente = ClientesUsandoServicio[i];
+            ClientesUsandoServicio.RemoveAt(i);
             ClientesAtendidos.Add(cliente);
         }
 
@@ -239,7 +261,7 @@ namespace Biblioteca
             int i = 0;
             if (idDispositivo.ElementAt(0) == 'T')
             {
-                while (i < this.telefonos.Count && this.telefonos[i].Id != idDispositivo) { }
+                while (i < this.telefonos.Count && this.telefonos[i].Id != idDispositivo)
                 {
                     i++;
                 }
@@ -250,7 +272,7 @@ namespace Biblioteca
                 }
             } else
             {
-                while (i < this.computadoras.Count && this.telefonos[i].Id != idDispositivo) { }
+                while (i < this.computadoras.Count && this.computadoras[i].Id != idDispositivo)
                 {
                     i++;
                 }
@@ -262,36 +284,16 @@ namespace Biblioteca
             }
         }
 
-        public float FinalizarUso(string idServicio, string idDispositivo)
+        public float FinalizarUso(int dniCliente, string tipoServicio)
         {
-            Servicio servicio = ObtenerServicioPorIdDispositivo(idServicio, idDispositivo);
+            Servicio servicio = ObtenerServicioSinFinalizar(dniCliente, tipoServicio);
             servicio.Fin = new DateTime();
             float pago = servicio.CostoDeUso();
             int minutosUso = (int)(servicio.Fin - servicio.Inicio).TotalMinutes;
+            string idDispositivo = servicio is Llamada ? ((Llamada)servicio).IdTelefono : ((Maquina)servicio).IdComputadora;
             ActualizarEstadoDispositivo(idDispositivo, false, minutosUso);
+            ClienteUsandoServicioACLienteAtendido(dniCliente);
             return pago;
-        }
-
-        private Servicio ObtenerServicioPorIdDispositivo(string idServicio, string idDispositivo)
-        {
-            if (idDispositivo.ElementAt(0) == Constantes.PRIMER_CARACTER_ID_TELEFONO)
-            {
-                int i = 0;
-                while(i < Llamadas.Count && idServicio != Llamadas[i].Id)
-                {
-                    i++;
-                }
-                return Llamadas[i];
-            }
-            else
-            {
-                int i = 0;
-                while (i < Maquinas.Count && idServicio != Maquinas[i].Id)
-                {
-                    i++;
-                }
-                return Maquinas[i];
-            }
         }
 
         public List<Computadora> ComputadorasOrdenadasMinDeUsoDesc()
@@ -433,6 +435,33 @@ namespace Biblioteca
         public string ServicioQueNecesita(Cliente cliente)
         {
             return cliente is ClienteComputadora ? Constantes.COMPUTADORA : Constantes.CABINA;
+        }
+
+        public Servicio ObtenerServicioSinFinalizar(int dniCliente, string tipoServicio)
+        {
+            Servicio servicio = null;
+            if (tipoServicio.Equals(Constantes.COMPUTADORA))
+            {
+                foreach (Servicio item in this.maquinas)
+                {
+                    if (item.DniCliente == dniCliente && item.Recaudacion == 0)
+                    {
+                        servicio = item;
+                        break;
+                    }
+                }
+            } else
+            {
+                foreach (Servicio item in this.llamadas)
+                {
+                    if (item.DniCliente == dniCliente && item.Recaudacion == 0)
+                    {
+                        servicio = item;
+                        break;
+                    }
+                }
+            }
+            return servicio;
         }
     }
 }

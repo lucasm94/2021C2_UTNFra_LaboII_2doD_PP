@@ -16,18 +16,23 @@ namespace CIber
     {
         private List<string> headersClientes;
         private DataTable dataTable;
-        private FrmAsignar frmAsignar;
+        private FrmAsignarMaquina frmAsignar;
+        private FrmAsignarCabina frmAsignarCabina;
+        private CiberCafe ciberCafe;
 
-        public FrmCliente()
+        public FrmCliente(CiberCafe ciber)
         {
             InitializeComponent();
+            this.ciberCafe = ciber;
             this.dataTable = new DataTable();
-            this.frmAsignar = new FrmAsignar();
+            this.frmAsignar = new FrmAsignarMaquina(this.ciberCafe, this.cmbEstadoCliente);
+            this.frmAsignarCabina = new FrmAsignarCabina(this.ciberCafe, this.cmbEstadoCliente);
             this.dgvClientes.DataSource = this.dataTable;
             this.headersClientes = new List<string>() { "Dni", "Nombre", "Apellido", "Edad", 
                 "Atendido", "Servicio" };
             this.cmbEstadoCliente.Items.Add(Constantes.ATENDIDO);
             this.cmbEstadoCliente.Items.Add(Constantes.ESPERANDO);
+            this.cmbEstadoCliente.Items.Add(Constantes.USANDO_SERVICIO);
             foreach (string header in this.headersClientes)
             {
                 this.dataTable.Columns.Add(header);
@@ -57,13 +62,9 @@ namespace CIber
                                 this.dataTable.Rows.Add(cliente.Dni, cliente.Apellido, cliente.Nombre,
                                     cliente.Edad, cliente.Atendido, this.ciberCafe.ServicioQueNecesita(cliente));
                             }
-                            this.btnAsignar.Enabled = false;
-                            this.btnLiberar.Enabled = true;
-                        } else
-                        {
-                            this.btnAsignar.Enabled = false;
-                            this.btnLiberar.Enabled = false;
                         }
+                        this.btnAsignar.Enabled = false;
+                        this.btnLiberar.Enabled = false;
                         break;
                     case Constantes.ESPERANDO:
                         if (this.ciberCafe.ClientesEnEspera.Count > 0)
@@ -76,6 +77,23 @@ namespace CIber
                             this.btnAsignar.Enabled = true;
                             this.btnLiberar.Enabled = false;
                         } else
+                        {
+                            this.btnAsignar.Enabled = false;
+                            this.btnLiberar.Enabled = false;
+                        }
+                        break;
+                    case Constantes.USANDO_SERVICIO:
+                        if (this.ciberCafe.ClientesUsandoServicio.Count > 0)
+                        {
+                            foreach (Cliente cliente in this.ciberCafe.ClientesUsandoServicio)
+                            {
+                                this.dataTable.Rows.Add(cliente.Dni, cliente.Apellido, cliente.Nombre,
+                                    cliente.Edad, cliente.Atendido, this.ciberCafe.ServicioQueNecesita(cliente));
+                            }
+                            this.btnAsignar.Enabled = false;
+                            this.btnLiberar.Enabled = true;
+                        }
+                        else
                         {
                             this.btnAsignar.Enabled = false;
                             this.btnLiberar.Enabled = false;
@@ -95,7 +113,8 @@ namespace CIber
             }
             else if (ValidarSiHayDisponibilidad(Constantes.CABINA))
             {
-                this.frmAsignar.ShowDialog();
+                this.frmAsignarCabina.CargarClienteYTelefono(cliente.Dni, this.ciberCafe.Telefonos(Constantes.LIBRES)[0].Id);
+                this.frmAsignarCabina.ShowDialog();
             } else
             {
                 MessageBox.Show("No hay disponibilidad para el servicio requerido en este momento, primero debe Liberar");
@@ -115,14 +134,18 @@ namespace CIber
 
         private void btnLiberar_Click(object sender, EventArgs e)
         {
-
+            double costo = this.ciberCafe.FinalizarUso(
+                Int32.Parse(this.dgvClientes.SelectedRows[0].Cells[0].Value.ToString()),
+                this.dgvClientes.SelectedRows[0].Cells[5].Value.ToString());
+            this.cmbEstadoCliente.SelectedIndex = -1;
+            this.cmbEstadoCliente.SelectedIndex = 2;
         }
 
         private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (this.dgvClientes.Rows.Count > 0 && 
                 this.dgvClientes.Rows[e.RowIndex].Cells[5].Value.ToString()
-                .Equals(Constantes.COMPUTADORA))
+                .Equals(Constantes.COMPUTADORA) && this.cmbEstadoCliente.Text.Equals(Constantes.ESPERANDO))
             {
                 this.tltNecesita.SetToolTip(dgvClientes, 
                     ((ClienteComputadora)this.ciberCafe.ClientesEnEspera[e.RowIndex]).QueNecesita());

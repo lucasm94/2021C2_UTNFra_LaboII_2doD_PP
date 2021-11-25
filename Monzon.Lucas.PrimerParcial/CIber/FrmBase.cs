@@ -13,10 +13,8 @@ namespace CIber
 {
     public partial class FrmBase : Form
     {
-        protected CiberCafe ciberCafe;
         public FrmBase()
         {
-            this.ciberCafe = new CiberCafe();
             InitializeComponent();
             this.lblFecha.Text = DateTime.Now.ToString();
         }

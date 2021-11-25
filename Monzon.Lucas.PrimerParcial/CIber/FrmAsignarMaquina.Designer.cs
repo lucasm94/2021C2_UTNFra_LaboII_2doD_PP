@@ -1,7 +1,7 @@
 ﻿
 namespace CIber
 {
-    partial class FrmAsignar
+    partial class FrmAsignarMaquina
     {
         /// <summary>
         /// Required designer variable.
@@ -32,9 +32,11 @@ namespace CIber
             this.components = new System.ComponentModel.Container();
             this.spcAsignar = new System.Windows.Forms.SplitContainer();
             this.rtbCliente = new System.Windows.Forms.RichTextBox();
+            this.cmbTiempo = new System.Windows.Forms.ComboBox();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.btnAsigna = new System.Windows.Forms.Button();
             this.dgvComputadoras = new System.Windows.Forms.DataGridView();
             this.tltAsignar = new System.Windows.Forms.ToolTip(this.components);
-            this.btnAsigna = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.spcAsignar)).BeginInit();
             this.spcAsignar.Panel1.SuspendLayout();
             this.spcAsignar.Panel2.SuspendLayout();
@@ -58,9 +60,12 @@ namespace CIber
             // 
             // spcAsignar.Panel2
             // 
+            this.spcAsignar.Panel2.Controls.Add(this.cmbTiempo);
+            this.spcAsignar.Panel2.Controls.Add(this.lblInfo);
+            this.spcAsignar.Panel2.Controls.Add(this.btnAsigna);
             this.spcAsignar.Panel2.Controls.Add(this.dgvComputadoras);
             this.spcAsignar.Size = new System.Drawing.Size(815, 409);
-            this.spcAsignar.SplitterDistance = 270;
+            this.spcAsignar.SplitterDistance = 242;
             this.spcAsignar.TabIndex = 2;
             // 
             // rtbCliente
@@ -69,15 +74,49 @@ namespace CIber
             this.rtbCliente.Location = new System.Drawing.Point(0, 0);
             this.rtbCliente.Name = "rtbCliente";
             this.rtbCliente.ReadOnly = true;
-            this.rtbCliente.Size = new System.Drawing.Size(270, 409);
+            this.rtbCliente.Size = new System.Drawing.Size(242, 409);
             this.rtbCliente.TabIndex = 0;
             this.rtbCliente.Text = "";
             // 
+            // cmbTiempo
+            // 
+            this.cmbTiempo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbTiempo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTiempo.FormattingEnabled = true;
+            this.cmbTiempo.Location = new System.Drawing.Point(248, 372);
+            this.cmbTiempo.Name = "cmbTiempo";
+            this.cmbTiempo.Size = new System.Drawing.Size(126, 33);
+            this.cmbTiempo.TabIndex = 22;
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(3, 376);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(250, 25);
+            this.lblInfo.TabIndex = 21;
+            this.lblInfo.Text = "Fraccion de tiempo requerido:";
+            // 
+            // btnAsigna
+            // 
+            this.btnAsigna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAsigna.Enabled = false;
+            this.btnAsigna.Location = new System.Drawing.Point(454, 372);
+            this.btnAsigna.Name = "btnAsigna";
+            this.btnAsigna.Size = new System.Drawing.Size(112, 33);
+            this.btnAsigna.TabIndex = 18;
+            this.btnAsigna.Text = "Asignar";
+            this.btnAsigna.UseVisualStyleBackColor = true;
+            this.btnAsigna.Click += new System.EventHandler(this.btnAsigna_Click);
+            // 
             // dgvComputadoras
             // 
+            this.dgvComputadoras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvComputadoras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvComputadoras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvComputadoras.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvComputadoras.Location = new System.Drawing.Point(0, 0);
             this.dgvComputadoras.MultiSelect = false;
             this.dgvComputadoras.Name = "dgvComputadoras";
@@ -87,35 +126,23 @@ namespace CIber
             this.dgvComputadoras.RowTemplate.Height = 33;
             this.dgvComputadoras.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvComputadoras.ShowCellToolTips = false;
-            this.dgvComputadoras.Size = new System.Drawing.Size(541, 409);
+            this.dgvComputadoras.Size = new System.Drawing.Size(569, 366);
             this.dgvComputadoras.TabIndex = 0;
             this.dgvComputadoras.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComputadoras_CellClick);
             // 
-            // btnAsigna
-            // 
-            this.btnAsigna.Enabled = false;
-            this.btnAsigna.Location = new System.Drawing.Point(286, 414);
-            this.btnAsigna.Name = "btnAsigna";
-            this.btnAsigna.Size = new System.Drawing.Size(112, 33);
-            this.btnAsigna.TabIndex = 18;
-            this.btnAsigna.Text = "Asignar";
-            this.btnAsigna.UseVisualStyleBackColor = true;
-            this.btnAsigna.Click += new System.EventHandler(this.btnAsigna_Click);
-            // 
-            // FrmAsignar
+            // FrmAsignarMaquina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(839, 459);
-            this.Controls.Add(this.btnAsigna);
             this.Controls.Add(this.spcAsignar);
-            this.Name = "FrmAsignar";
+            this.Name = "FrmAsignarMaquina";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ciber Cafe - Asignar";
             this.Controls.SetChildIndex(this.spcAsignar, 0);
-            this.Controls.SetChildIndex(this.btnAsigna, 0);
             this.spcAsignar.Panel1.ResumeLayout(false);
             this.spcAsignar.Panel2.ResumeLayout(false);
+            this.spcAsignar.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spcAsignar)).EndInit();
             this.spcAsignar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvComputadoras)).EndInit();
@@ -131,5 +158,7 @@ namespace CIber
         private System.Windows.Forms.RichTextBox rtbCliente;
         private System.Windows.Forms.ToolTip tltAsignar;
         private System.Windows.Forms.Button btnAsigna;
+        private System.Windows.Forms.ComboBox cmbTiempo;
+        private System.Windows.Forms.Label lblInfo;
     }
 }
