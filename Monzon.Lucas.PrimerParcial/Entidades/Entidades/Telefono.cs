@@ -71,7 +71,7 @@ namespace Biblioteca
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return (id, enUso, minutosDeUsoTotales, marca).GetHashCode();
         }
 
         public override string ToString()

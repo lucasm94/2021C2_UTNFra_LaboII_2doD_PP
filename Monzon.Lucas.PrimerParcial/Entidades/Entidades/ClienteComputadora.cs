@@ -67,7 +67,7 @@ namespace Biblioteca
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return (dni, apellido, edad, necesita.Keys.Count).GetHashCode();
         }
 
         public string QueNecesita()

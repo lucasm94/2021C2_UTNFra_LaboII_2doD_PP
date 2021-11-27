@@ -1,4 +1,5 @@
 ﻿using Biblioteca;
+using Biblioteca.Entidades;
 using Biblioteca.Servicios;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,14 @@ namespace CIber
         private ClienteComputadora cliente;
         private ComboBox estadoCliente;
         private CiberCafe ciberCafe;
+        private TiempoReserva tiempoReserva;
 
         public FrmAsignarMaquina(CiberCafe ciber, ComboBox estadoCliente)
         {
             InitializeComponent();
             this.ciberCafe = ciber;
             this.estadoCliente = estadoCliente;
+            this.tiempoReserva = new TiempoReserva();
             this.headersComputadoras = new List<string>() { "ID", "En Uso", "Procesador", "Ram",
                 "Placa de Video", "Disco Duro" };
             this.dataTable = new DataTable();
@@ -42,9 +45,9 @@ namespace CIber
             }
             if (this.dataTable.Rows.Count > 0)
             {
-                this.cmbTiempo.Items.Add(Biblioteca.Enum.TiempoReserva.MediaHora);
-                this.cmbTiempo.Items.Add(Biblioteca.Enum.TiempoReserva.UnaHora);
-                this.cmbTiempo.Items.Add(Biblioteca.Enum.TiempoReserva.Libre);
+                this.cmbTiempo.Items.Add(this.tiempoReserva[0]);
+                this.cmbTiempo.Items.Add(this.tiempoReserva[1]);
+                this.cmbTiempo.Items.Add(this.tiempoReserva[2]);
                 this.cmbTiempo.SelectedIndex = 0;
                 this.btnAsigna.Enabled = true;
             }

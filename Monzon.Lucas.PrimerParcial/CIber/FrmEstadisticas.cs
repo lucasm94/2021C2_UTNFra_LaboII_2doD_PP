@@ -82,18 +82,24 @@ namespace CIber
 
         private void cmbMasPedidos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /*switch (this.cmbMasPedidos.Text)
+            string pedido = "";
+            switch (this.cmbMasPedidos.Text)
             {
                 case Constantes.SOFTWARE:
-                    this.lblMasPedidoRes.Text = this.ciber.SoftwareMasPedidos();
+                    pedido = this.ciber.SoftwareMasPedidos();
                     break;
                 case Constantes.JUEGOS:
-                    this.lblMasPedidoRes.Text = this.ciber.JuegoMasPedidos();
+                    pedido = this.ciber.JuegoMasPedidos();
                     break;
                 case Constantes.PERIFERICOS:
-                    this.lblMasPedidoRes.Text = this.ciber.PerifericoMasPedidos();
+                    pedido = this.ciber.PerifericoMasPedidos();
                     break;
-            }*/
+            }
+            if (pedido.Length == 0)
+            {
+                pedido = "Sin pedidos";
+            }
+            this.lblMasPedidoRes.Text = pedido;
         }
     }
 }

@@ -391,27 +391,36 @@ namespace Biblioteca
 
         public string SoftwareMasPedidos()
         {
-            if (this.softwaresPedidos.Count > 0)
+            int maxPedido = this.softwaresPedidos.Values.Max();
+            if (maxPedido > 0)
             {
-                return this.softwaresPedidos.Max().Key.ToString();
+                return this.softwaresPedidos
+                    .FirstOrDefault(keyValue => keyValue.Value.Equals(maxPedido))
+                    .Key.ToString();
             }
             return "";
         }
 
         public string PerifericoMasPedidos()
         {
-            if (this.perifericosPedidos.Count > 0)
+            int maxPedido = this.perifericosPedidos.Values.Max();
+            if (maxPedido > 0)
             {
-                return this.perifericosPedidos.Max().Key.ToString();
+                return this.perifericosPedidos
+                    .FirstOrDefault(keyValue => keyValue.Value.Equals(maxPedido))
+                    .Key.ToString();
             }
             return "";
         }
 
         public string JuegoMasPedidos()
         {
-            if (this.juegosPedidos.Count > 0)
+            int maxPedido = this.juegosPedidos.Values.Max();
+            if (maxPedido > 0)
             {
-                return this.juegosPedidos.Max().Key.ToString();
+                return this.juegosPedidos
+                    .FirstOrDefault(keyValue => keyValue.Value.Equals(maxPedido))
+                    .Key.ToString();
             }
             return "";
         }

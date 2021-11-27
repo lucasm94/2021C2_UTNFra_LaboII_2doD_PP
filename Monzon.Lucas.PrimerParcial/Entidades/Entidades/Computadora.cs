@@ -124,7 +124,7 @@ namespace Biblioteca
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return (id, enUso, minutosDeUsoTotales, hardware.Procesador).GetHashCode();
         }
 
         public override string ToString()

@@ -59,11 +59,6 @@ namespace Biblioteca
             return iguales;
         }
 
-        public override int GetHashCode()
-        {
-            return (id, enUso, minutosDeUsoTotales).GetHashCode();
-        }
-
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
