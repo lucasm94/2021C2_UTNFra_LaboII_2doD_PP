@@ -1,4 +1,5 @@
 ﻿using Biblioteca;
+using Biblioteca.Entidades;
 using Biblioteca.Servicios;
 using System;
 using System.Collections.Generic;
@@ -134,11 +135,15 @@ namespace CIber
 
         private void btnLiberar_Click(object sender, EventArgs e)
         {
-            double costo = this.ciberCafe.FinalizarUso(
+            ServicioFinalizadoInfo info = this.ciberCafe.FinalizarUso(
                 Int32.Parse(this.dgvClientes.SelectedRows[0].Cells[0].Value.ToString()),
                 this.dgvClientes.SelectedRows[0].Cells[5].Value.ToString());
             this.cmbEstadoCliente.SelectedIndex = -1;
             this.cmbEstadoCliente.SelectedIndex = 2;
+            MessageBox.Show($"El tiempo de uso es: {info.MinutosDeUso} min\n" +
+                $"El monto bruto a pagar es: ${info.BrutoAPagar}\n" +
+                $"El monto neto a pagar es: ${info.NetoAPagar}\n" +
+                $"El monto final a pagar es: ${info.MontoFinal}");
         }
 
         private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)

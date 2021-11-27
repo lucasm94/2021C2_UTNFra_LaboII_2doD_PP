@@ -37,11 +37,12 @@ namespace CIber
             this.lblCabinaInfo = new System.Windows.Forms.Label();
             this.lblCabina = new System.Windows.Forms.Label();
             this.txtCodArea = new System.Windows.Forms.TextBox();
-            this.txtNumero1 = new System.Windows.Forms.TextBox();
-            this.txtNumero2 = new System.Windows.Forms.TextBox();
+            this.txtNumero = new System.Windows.Forms.TextBox();
             this.lblGuion = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblCodPais = new System.Windows.Forms.Label();
+            this.lblCodArea = new System.Windows.Forms.Label();
+            this.lblNumero = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblAsignarCabina
@@ -55,8 +56,7 @@ namespace CIber
             // 
             // txtCodPais
             // 
-            this.txtCodPais.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCodPais.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCodPais.Location = new System.Drawing.Point(263, 56);
             this.txtCodPais.MaxLength = 4;
             this.txtCodPais.Name = "txtCodPais";
@@ -67,7 +67,7 @@ namespace CIber
             // btnAsignar
             // 
             this.btnAsignar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAsignar.Location = new System.Drawing.Point(498, 103);
+            this.btnAsignar.Location = new System.Drawing.Point(498, 120);
             this.btnAsignar.Name = "btnAsignar";
             this.btnAsignar.Size = new System.Drawing.Size(112, 34);
             this.btnAsignar.TabIndex = 20;
@@ -113,38 +113,25 @@ namespace CIber
             // 
             // txtCodArea
             // 
-            this.txtCodArea.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCodArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCodArea.Location = new System.Drawing.Point(357, 56);
             this.txtCodArea.MaxLength = 4;
             this.txtCodArea.Name = "txtCodArea";
             this.txtCodArea.Size = new System.Drawing.Size(62, 31);
             this.txtCodArea.TabIndex = 25;
             // 
-            // txtNumero1
+            // txtNumero
             // 
-            this.txtNumero1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNumero1.Location = new System.Drawing.Point(453, 56);
-            this.txtNumero1.MaxLength = 4;
-            this.txtNumero1.Name = "txtNumero1";
-            this.txtNumero1.Size = new System.Drawing.Size(62, 31);
-            this.txtNumero1.TabIndex = 26;
-            // 
-            // txtNumero2
-            // 
-            this.txtNumero2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNumero2.Location = new System.Drawing.Point(548, 56);
-            this.txtNumero2.MaxLength = 4;
-            this.txtNumero2.Name = "txtNumero2";
-            this.txtNumero2.Size = new System.Drawing.Size(62, 31);
-            this.txtNumero2.TabIndex = 27;
+            this.txtNumero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNumero.Location = new System.Drawing.Point(453, 56);
+            this.txtNumero.MaxLength = 8;
+            this.txtNumero.Name = "txtNumero";
+            this.txtNumero.Size = new System.Drawing.Size(157, 31);
+            this.txtNumero.TabIndex = 26;
             // 
             // lblGuion
             // 
-            this.lblGuion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblGuion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblGuion.AutoSize = true;
             this.lblGuion.Location = new System.Drawing.Point(332, 59);
             this.lblGuion.Name = "lblGuion";
@@ -154,8 +141,7 @@ namespace CIber
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(428, 59);
             this.label1.Name = "label1";
@@ -163,27 +149,50 @@ namespace CIber
             this.label1.TabIndex = 29;
             this.label1.Text = "-";
             // 
-            // label2
+            // lblCodPais
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(523, 59);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(19, 25);
-            this.label2.TabIndex = 30;
-            this.label2.Text = "-";
+            this.lblCodPais.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCodPais.AutoSize = true;
+            this.lblCodPais.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.lblCodPais.Location = new System.Drawing.Point(254, 90);
+            this.lblCodPais.Name = "lblCodPais";
+            this.lblCodPais.Size = new System.Drawing.Size(90, 25);
+            this.lblCodPais.TabIndex = 30;
+            this.lblCodPais.Text = "(Cod País)";
+            // 
+            // lblCodArea
+            // 
+            this.lblCodArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCodArea.AutoSize = true;
+            this.lblCodArea.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.lblCodArea.Location = new System.Drawing.Point(359, 90);
+            this.lblCodArea.Name = "lblCodArea";
+            this.lblCodArea.Size = new System.Drawing.Size(72, 25);
+            this.lblCodArea.TabIndex = 31;
+            this.lblCodArea.Text = "(Prefijo)";
+            // 
+            // lblNumero
+            // 
+            this.lblNumero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblNumero.AutoSize = true;
+            this.lblNumero.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.lblNumero.Location = new System.Drawing.Point(493, 90);
+            this.lblNumero.Name = "lblNumero";
+            this.lblNumero.Size = new System.Drawing.Size(89, 25);
+            this.lblNumero.TabIndex = 32;
+            this.lblNumero.Text = "(Teléfono)";
             // 
             // FrmAsignarCabina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 184);
-            this.Controls.Add(this.label2);
+            this.ClientSize = new System.Drawing.Size(622, 200);
+            this.Controls.Add(this.lblNumero);
+            this.Controls.Add(this.lblCodArea);
+            this.Controls.Add(this.lblCodPais);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblGuion);
-            this.Controls.Add(this.txtNumero2);
-            this.Controls.Add(this.txtNumero1);
+            this.Controls.Add(this.txtNumero);
             this.Controls.Add(this.txtCodArea);
             this.Controls.Add(this.lblCabinaInfo);
             this.Controls.Add(this.lblCabina);
@@ -192,6 +201,7 @@ namespace CIber
             this.Controls.Add(this.btnAsignar);
             this.Controls.Add(this.txtCodPais);
             this.Controls.Add(this.lblAsignarCabina);
+            this.MaximumSize = new System.Drawing.Size(700, 260);
             this.MinimumSize = new System.Drawing.Size(644, 200);
             this.Name = "FrmAsignarCabina";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -204,11 +214,12 @@ namespace CIber
             this.Controls.SetChildIndex(this.lblCabina, 0);
             this.Controls.SetChildIndex(this.lblCabinaInfo, 0);
             this.Controls.SetChildIndex(this.txtCodArea, 0);
-            this.Controls.SetChildIndex(this.txtNumero1, 0);
-            this.Controls.SetChildIndex(this.txtNumero2, 0);
+            this.Controls.SetChildIndex(this.txtNumero, 0);
             this.Controls.SetChildIndex(this.lblGuion, 0);
             this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.lblCodPais, 0);
+            this.Controls.SetChildIndex(this.lblCodArea, 0);
+            this.Controls.SetChildIndex(this.lblNumero, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,10 +235,11 @@ namespace CIber
         private System.Windows.Forms.Label lblCabinaInfo;
         private System.Windows.Forms.Label lblCabina;
         private System.Windows.Forms.TextBox txtCodArea;
-        private System.Windows.Forms.TextBox txtNumero1;
-        private System.Windows.Forms.TextBox txtNumero2;
+        private System.Windows.Forms.TextBox txtNumero;
         private System.Windows.Forms.Label lblGuion;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblCodPais;
+        private System.Windows.Forms.Label lblCodArea;
+        private System.Windows.Forms.Label lblNumero;
     }
 }

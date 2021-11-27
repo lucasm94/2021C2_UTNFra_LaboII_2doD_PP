@@ -32,11 +32,14 @@ namespace CIber
         private void button1_Click(object sender, EventArgs e)
         {
             if (!(String.IsNullOrEmpty(txtCodPais.Text) && String.IsNullOrEmpty(txtCodArea.Text) &&
-                String.IsNullOrEmpty(txtNumero1.Text) && String.IsNullOrEmpty(txtNumero2.Text)))
+                String.IsNullOrEmpty(txtNumero.Text)))
             {
                 this.ciber.Asignar(Int32.Parse(this.lblDniClienteInfo.Text), this.lblCabinaInfo.Text, 
-                    $"{this.txtCodPais.Text}-{this.txtCodArea.Text}-{this.txtNumero1.Text}-{this.txtNumero2.Text}");
+                    $"{this.txtCodPais.Text}-{this.txtCodArea.Text}-{this.txtNumero.Text}");
                 MessageBox.Show("Se asigno maquina con exito");
+                this.txtCodArea.Text = "";
+                this.txtCodPais.Text = "";
+                this.txtNumero.Text = "";
                 this.estadoCliente.SelectedIndex = -1;
                 this.estadoCliente.SelectedIndex = 1;
                 this.Close();

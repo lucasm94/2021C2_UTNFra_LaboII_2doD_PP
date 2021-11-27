@@ -16,6 +16,7 @@ namespace CIber
     {
         private FrmDispositivos frmDispositivos;
         private FrmCliente frmClientes;
+        private FrmEstadisticas frmEstadisticas;
         private CiberCafe ciberCafe;
 
         public FrmMenu(CiberCafe ciber)
@@ -24,6 +25,7 @@ namespace CIber
             this.ciberCafe = ciber;
             this.frmDispositivos = new FrmDispositivos(this.ciberCafe);
             this.frmClientes = new FrmCliente(this.ciberCafe);
+            this.frmEstadisticas = new FrmEstadisticas(this.ciberCafe);
             this.ModificarNombreBotonACerrar();
         }
 
@@ -35,6 +37,11 @@ namespace CIber
         private void btnClientesMenu_Click(object sender, EventArgs e)
         {
             this.frmClientes.ShowDialog();
+        }
+
+        private void btnEstadisticasMenu_Click(object sender, EventArgs e)
+        {
+            this.frmEstadisticas.ShowDialog();
         }
     }
 }

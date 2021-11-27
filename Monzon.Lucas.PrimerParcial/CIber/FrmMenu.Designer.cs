@@ -77,6 +77,7 @@ namespace CIber
             this.btnEstadisticasMenu.TabIndex = 2;
             this.btnEstadisticasMenu.Text = "Estadisticas";
             this.btnEstadisticasMenu.UseVisualStyleBackColor = true;
+            this.btnEstadisticasMenu.Click += new System.EventHandler(this.btnEstadisticasMenu_Click);
             // 
             // btnClientesMenu
             // 

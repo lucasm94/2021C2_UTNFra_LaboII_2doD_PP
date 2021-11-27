@@ -193,7 +193,7 @@ namespace Biblioteca
         public void Asignar(int dniCliente, string idTelefono, string nroTelefono)
         {
             Enum.TipoLlamada tipo = ObtenerTipoLlamada(nroTelefono);
-            Llamada llamada = new Llamada(idTelefono, nroTelefono, tipo, dniCliente, new DateTime());
+            Llamada llamada = new Llamada(idTelefono, nroTelefono, tipo, dniCliente, DateTime.Now);
             ClienteEnEsperaACLienteAtendido(dniCliente);
             ActualizarEstadoDispositivo(idTelefono, true, 0);
             Llamadas.Add(llamada);
@@ -201,7 +201,7 @@ namespace Biblioteca
 
         public void Asignar(int dniCliente, string idComputadora, Enum.TiempoReserva tiempoReserva)
         {
-            Maquina maquina = new Maquina(idComputadora, tiempoReserva, dniCliente, new DateTime());
+            Maquina maquina = new Maquina(idComputadora, tiempoReserva, dniCliente, DateTime.Now);
             ClienteEnEsperaACLienteAtendido(dniCliente);
             ActualizarEstadoDispositivo(idComputadora, true, 0);
             Maquinas.Add(maquina);
@@ -284,16 +284,17 @@ namespace Biblioteca
             }
         }
 
-        public float FinalizarUso(int dniCliente, string tipoServicio)
+        public ServicioFinalizadoInfo FinalizarUso(int dniCliente, string tipoServicio)
         {
             Servicio servicio = ObtenerServicioSinFinalizar(dniCliente, tipoServicio);
-            servicio.Fin = new DateTime();
-            float pago = servicio.CostoDeUso();
-            int minutosUso = (int)(servicio.Fin - servicio.Inicio).TotalMinutes;
+            servicio.Fin = DateTime.Now;
+            float monto = servicio.CostoDeUso();
+            int minutosUso = (int)(servicio.Fin - servicio.Inicio).Seconds;
             string idDispositivo = servicio is Llamada ? ((Llamada)servicio).IdTelefono : ((Maquina)servicio).IdComputadora;
             ActualizarEstadoDispositivo(idDispositivo, false, minutosUso);
             ClienteUsandoServicioACLienteAtendido(dniCliente);
-            return pago;
+            float iva = (float)Math.Round((monto * 0.21), 2);
+            return new ServicioFinalizadoInfo(minutosUso, monto, iva, (float)Math.Round(monto+iva, 2));
         }
 
         public List<Computadora> ComputadorasOrdenadasMinDeUsoDesc()
@@ -325,18 +326,18 @@ namespace Biblioteca
             return ganancias;
         }
 
-        public int HorasTotalesPorTipoLlamada(Enum.TipoLlamada tipo)
+        public int HorasTotalesPorTipoLlamada(string tipo)
         {
             int horasTotales = 0;
             switch (tipo)
             {
-                case Enum.TipoLlamada.Local:
+                case Constantes.LOCAL:
                     horasTotales = HorasPorTipoDeLLamada(Enum.TipoLlamada.Local);
                     break;
-                case Enum.TipoLlamada.Larga_Distancia:
+                case Constantes.LARGA_DISTANCIA:
                     horasTotales = HorasPorTipoDeLLamada(Enum.TipoLlamada.Larga_Distancia);
                     break;
-                case Enum.TipoLlamada.Internacional:
+                case Constantes.INTERNACIONAL:
                     horasTotales = HorasPorTipoDeLLamada(Enum.TipoLlamada.Internacional);
                     break;
             }
@@ -357,18 +358,18 @@ namespace Biblioteca
             return horasTotales;
         }
 
-        public float RecaudacionTotalPorTipoLlamada(Enum.TipoLlamada tipo)
+        public float RecaudacionTotalPorTipoLlamada(string tipo)
         {
             float recaudacionTotal = 0f;
             switch (tipo)
             {
-                case Enum.TipoLlamada.Local:
+                case Constantes.LOCAL:
                     recaudacionTotal = RecaudacionPorTipoDeLLamada(Enum.TipoLlamada.Local);
                     break;
-                case Enum.TipoLlamada.Larga_Distancia:
+                case Constantes.LARGA_DISTANCIA:
                     recaudacionTotal = RecaudacionPorTipoDeLLamada(Enum.TipoLlamada.Larga_Distancia);
                     break;
-                case Enum.TipoLlamada.Internacional:
+                case Constantes.INTERNACIONAL:
                     recaudacionTotal = RecaudacionPorTipoDeLLamada(Enum.TipoLlamada.Internacional);
                     break;
             }
@@ -390,17 +391,29 @@ namespace Biblioteca
 
         public string SoftwareMasPedidos()
         {
-            return this.softwaresPedidos.Max().Key.ToString();
+            if (this.softwaresPedidos.Count > 0)
+            {
+                return this.softwaresPedidos.Max().Key.ToString();
+            }
+            return "";
         }
 
         public string PerifericoMasPedidos()
         {
-            return this.perifericosPedidos.Max().Key.ToString();
+            if (this.perifericosPedidos.Count > 0)
+            {
+                return this.perifericosPedidos.Max().Key.ToString();
+            }
+            return "";
         }
 
         public string JuegoMasPedidos()
         {
-            return this.juegosPedidos.Max().Key.ToString();
+            if (this.juegosPedidos.Count > 0)
+            {
+                return this.juegosPedidos.Max().Key.ToString();
+            }
+            return "";
         }
 
         public void CopiarJuegoACd(Enum.Juego juego, int cantidad)

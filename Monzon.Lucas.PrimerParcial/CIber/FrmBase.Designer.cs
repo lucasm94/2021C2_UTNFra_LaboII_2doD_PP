@@ -39,7 +39,7 @@ namespace CIber
             // 
             this.lblUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Location = new System.Drawing.Point(473, 416);
+            this.lblUsuario.Location = new System.Drawing.Point(549, 416);
             this.lblUsuario.Name = "lblUsuario";
             this.lblUsuario.Size = new System.Drawing.Size(126, 25);
             this.lblUsuario.TabIndex = 0;

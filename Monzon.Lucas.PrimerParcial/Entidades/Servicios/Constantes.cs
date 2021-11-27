@@ -12,6 +12,7 @@ namespace Biblioteca.Servicios
         public const string LIBRES = "Libres";
         public const string TODO = "Todos";
         public const string CABINA = "Cabina";
+        public const string MAQUINA = "Maquina";
         public const char PRIMER_CARACTER_ID_TELEFONO = 'T';
         public const string COMPUTADORA = "Computadora";
         public const string TELEFONO = "Telefono";
@@ -22,5 +23,8 @@ namespace Biblioteca.Servicios
         public const string JUEGOS = "Juegos";
         public const string SOFTWARE = "Software";
         public const string HARDWARE = "Hardware";
+        public const string LOCAL = "Local";
+        public const string LARGA_DISTANCIA = "Larga distancia";
+        public const string INTERNACIONAL = "Internacional";
     }
 }

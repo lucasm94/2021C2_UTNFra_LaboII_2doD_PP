@@ -16,7 +16,7 @@ namespace CIber
         public FrmBase()
         {
             InitializeComponent();
-            this.lblFecha.Text = DateTime.Now.ToString();
+            this.lblFecha.Text = DateTime.Now.Date.ToShortDateString();
         }
 
         private void btnVolverCliente_Click(object sender, EventArgs e)

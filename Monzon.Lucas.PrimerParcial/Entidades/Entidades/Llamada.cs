@@ -102,15 +102,15 @@ namespace Biblioteca.Entidades
             {
                 case Enum.TipoLlamada.Local:
                     segundosQueSonMinutos = (float)(this.Fin - this.Inicio).TotalSeconds;
-                    this.pago = (float)(segundosQueSonMinutos * 1.00);
+                    this.pago = (float)Math.Round((segundosQueSonMinutos * 1.00), 2);
                     break;
                 case Enum.TipoLlamada.Larga_Distancia:
                     segundosQueSonMinutos = (float)(this.Fin - this.Inicio).TotalSeconds;
-                    this.pago = (float)(segundosQueSonMinutos * 2.50);
+                    this.pago = (float)Math.Round((segundosQueSonMinutos * 2.50), 2);
                     break;
                 case Enum.TipoLlamada.Internacional:
                     segundosQueSonMinutos = (float)(this.Fin - this.Inicio).TotalSeconds;
-                    this.pago = (float)(segundosQueSonMinutos * 5.00);
+                    this.pago = (float)Math.Round((segundosQueSonMinutos * 5.00), 2);
                     break;
             }
             return this.pago;
