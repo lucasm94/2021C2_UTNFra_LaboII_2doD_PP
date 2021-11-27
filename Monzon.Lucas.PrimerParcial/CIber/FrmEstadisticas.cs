@@ -35,28 +35,28 @@ namespace CIber
         {
             this.cmbServicio.Items.Add(Constantes.CABINA);
             this.cmbServicio.Items.Add(Constantes.MAQUINA);
-            this.cmbServicio.SelectedIndex = 0;
+            this.cmbServicio.SelectedIndex = -1;
             this.cmbRecaudacion.Items.Add(Constantes.LOCAL);
             this.cmbRecaudacion.Items.Add(Constantes.LARGA_DISTANCIA);
             this.cmbRecaudacion.Items.Add(Constantes.INTERNACIONAL);
-            this.cmbRecaudacion.SelectedIndex = 0;
+            this.cmbRecaudacion.SelectedIndex = -1;
             this.cmbDispositivo.Items.Add(Constantes.COMPUTADORA);
             this.cmbDispositivo.Items.Add(Constantes.TELEFONO);
-            this.cmbDispositivo.SelectedIndex = 0;
+            this.cmbDispositivo.SelectedIndex = -1;
             this.cmbMasPedidos.Items.Add(Constantes.SOFTWARE);
             this.cmbMasPedidos.Items.Add(Constantes.JUEGOS);
             this.cmbMasPedidos.Items.Add(Constantes.PERIFERICOS);
-            this.cmbMasPedidos.SelectedIndex = 0;
+            this.cmbMasPedidos.SelectedIndex = -1;
         }
 
         private void cmbServicio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.lblGananciasServicios.Text = this.ciber.GananciasTotalesPorServicio(this.cmbServicio.Text).ToString();
+            this.lblGananciasServicios.Text = $"${this.ciber.GananciasTotalesPorServicio(this.cmbServicio.Text)}";
         }
 
         private void cmbRecaudacion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.lblRecaudacionTipo.Text = this.ciber.RecaudacionTotalPorTipoLlamada(this.cmbRecaudacion.Text).ToString();
+            this.lblRecaudacionTipo.Text = $"${this.ciber.RecaudacionTotalPorTipoLlamada(this.cmbRecaudacion.Text)}";
             this.lblHorasTotales.Text = this.ciber.HorasTotalesPorTipoLlamada(this.cmbRecaudacion.Text).ToString();
         }
 

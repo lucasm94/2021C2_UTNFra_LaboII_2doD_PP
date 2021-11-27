@@ -258,7 +258,7 @@ namespace CIber
             this.MinimumSize = new System.Drawing.Size(1090, 440);
             this.Name = "FrmEstadisticas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FrmEstadisticas";
+            this.Text = "Estadisticas";
             this.Controls.SetChildIndex(this.lblTituloGanancia, 0);
             this.Controls.SetChildIndex(this.cmbServicio, 0);
             this.Controls.SetChildIndex(this.lblServicio, 0);

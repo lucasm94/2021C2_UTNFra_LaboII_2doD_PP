@@ -67,6 +67,7 @@ namespace CIber
             this.btnCopiasMenu.TabIndex = 3;
             this.btnCopiasMenu.Text = "Copias";
             this.btnCopiasMenu.UseVisualStyleBackColor = true;
+            this.btnCopiasMenu.Click += new System.EventHandler(this.btnCopiasMenu_Click);
             // 
             // btnEstadisticasMenu
             // 

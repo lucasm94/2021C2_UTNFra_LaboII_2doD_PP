@@ -99,7 +99,7 @@ namespace Biblioteca
                     break;
             }
             return computadorasList;
-        } 
+        }
 
         public List<Telefono> Telefonos(string busqueda)
         {
@@ -289,7 +289,7 @@ namespace Biblioteca
             Servicio servicio = ObtenerServicioSinFinalizar(dniCliente, tipoServicio);
             servicio.Fin = DateTime.Now;
             float monto = servicio.CostoDeUso();
-            int minutosUso = (int)(servicio.Fin - servicio.Inicio).Seconds;
+            int minutosUso = (int)(servicio.Fin - servicio.Inicio).TotalSeconds;
             string idDispositivo = servicio is Llamada ? ((Llamada)servicio).IdTelefono : ((Maquina)servicio).IdComputadora;
             ActualizarEstadoDispositivo(idDispositivo, false, minutosUso);
             ClienteUsandoServicioACLienteAtendido(dniCliente);
@@ -438,7 +438,7 @@ namespace Biblioteca
 
         public Copia ObtenerInfoDeCopiaDeUnJuego(Enum.Juego juego)
         {
-            if (this.copiaJuegos[juego] != null)
+            if (this.copiaJuegos.Count > 0 && this.copiaJuegos[juego] != null)
             {
                 return this.copiaJuegos[juego];
             }
@@ -475,6 +475,49 @@ namespace Biblioteca
                 }
             }
             return servicio;
+        }
+
+        public void ActualizarMasPedidos(Dictionary<string, List<string>> necesita)
+        {
+            foreach (string key in necesita.Keys)
+            {
+                switch (key)
+                {
+                    case Constantes.SOFTWARE:
+                        foreach (string software in necesita[key])
+                        {
+                            Enum.Software softwareKey = 
+                                (Enum.Software)System.Enum.Parse(typeof(Enum.Software), software);
+                            if (this.softwaresPedidos.ContainsKey(softwareKey))
+                            {
+                                this.softwaresPedidos[softwareKey] += 1;
+                            }
+                        }
+                        break;
+                    case Constantes.JUEGOS:
+                        foreach (string juego in necesita[key])
+                        {
+                            Enum.Juego juegoKey = 
+                                (Enum.Juego)System.Enum.Parse(typeof(Enum.Juego), juego);
+                            if (this.juegosPedidos.ContainsKey(juegoKey))
+                            {
+                                this.juegosPedidos[juegoKey] += 1;
+                            }
+                        }
+                        break;
+                    case Constantes.PERIFERICOS:
+                        foreach (string periferico in necesita[key])
+                        {
+                            Enum.Periferico perifericoKey = 
+                                (Enum.Periferico)System.Enum.Parse(typeof(Enum.Periferico), periferico);
+                            if (this.perifericosPedidos.ContainsKey(perifericoKey))
+                            {
+                                this.perifericosPedidos[perifericoKey] += 1;
+                            }
+                        }
+                        break;
+                }
+            }
         }
     }
 }

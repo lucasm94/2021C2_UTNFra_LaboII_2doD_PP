@@ -84,6 +84,7 @@ namespace CIber
                     System.Enum.Parse(typeof(Biblioteca.Enum.TiempoReserva), this.cmbTiempo.SelectedItem.ToString());
                 this.ciberCafe.Asignar(this.cliente.Dni, computadoraSelecionada.Id, tiempoReserva);
                 MessageBox.Show("Se asigno maquina con exito");
+                this.ciberCafe.ActualizarMasPedidos(this.cliente.Necesita);
                 this.estadoCliente.SelectedIndex = -1;
                 this.estadoCliente.SelectedIndex = 1;
                 this.Close();

@@ -78,13 +78,18 @@ namespace Biblioteca.Entidades
 
         public override float CostoDeUso()
         {
-            // Todo calcular costoDeUso del alquiler de una maquina
-            if (tiempoReserva.Equals("Libre"))
+            double minutosDeUso = (this.Fin - this.Inicio).TotalSeconds;
+            double fraccionMinutoUpp= Math.Ceiling((minutosDeUso / 30));
+            if (minutosDeUso < 30)
             {
                 this.pago = 0.50F;
+            }
+            else if (minutosDeUso > 30 && minutosDeUso < 60)
+            {
+                this.pago = 0.50F * 2;
             } else
             {
-                this.pago = 0;
+                this.pago = (float)(0.50 * fraccionMinutoUpp);
             }
             return this.pago;
         }
