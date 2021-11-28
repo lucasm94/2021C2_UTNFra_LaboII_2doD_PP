@@ -11,6 +11,12 @@ namespace Biblioteca
         private Enum.Tipo tipo;
         private Enum.Marca marca;
 
+        /// <summary>
+        /// Constructor con parametros de Telefono
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="tipo"></param>
+        /// <param name="marca"></param>
         public Telefono(string id, Enum.Tipo tipo, Enum.Marca marca) 
             : base(id)
         {
@@ -42,6 +48,12 @@ namespace Biblioteca
             }
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo == en donde indicara si dos telefonos son iguales.
+        /// </summary>
+        /// <param name="telefonoUno"></param>
+        /// <param name="telefonoDos"></param>
+        /// <returns></returns>
         public static bool operator ==(Telefono telefonoUno, Telefono telefonoDos)
         {
             bool iguales = false;
@@ -53,11 +65,22 @@ namespace Biblioteca
             return iguales;
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo != en donde indicara si dos telefonos son distintos
+        /// </summary>
+        /// <param name="telefonoUno"></param>
+        /// <param name="telefonoDos"></param>
+        /// <returns></returns>
         public static bool operator !=(Telefono telefonoUno, Telefono telefonoDos)
         {
             return !(telefonoUno == telefonoDos);
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo Equals para un telefono
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             bool equals = false;
@@ -69,11 +92,19 @@ namespace Biblioteca
             return equals;
         }
 
+        /// <summary>
+        /// Sobrecarga del método GetHashCode
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return (id, enUso, minutosDeUsoTotales, marca).GetHashCode();
         }
 
+        /// <summary>
+        /// Sobrecarga del método ToString. Imprime los datos de un telefono
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

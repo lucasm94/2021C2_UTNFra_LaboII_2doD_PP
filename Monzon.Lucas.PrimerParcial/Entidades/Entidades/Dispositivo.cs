@@ -9,7 +9,7 @@ namespace Biblioteca
         protected bool enUso;
         protected int minutosDeUsoTotales;
 
-        public Dispositivo(string id)
+        protected Dispositivo(string id)
         {
             this.id = id;
             this.enUso = false;
@@ -59,6 +59,10 @@ namespace Biblioteca
             return iguales;
         }
 
+        /// <summary>
+        /// Sobrecarga del método ToString. Imprime los datos basicos de un dispositivo
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

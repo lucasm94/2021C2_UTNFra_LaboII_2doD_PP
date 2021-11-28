@@ -14,6 +14,13 @@ namespace Biblioteca
         protected int edad;
         protected bool atendido;
 
+        /// <summary>
+        /// Constructor con parametros de un cliente
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="nombre"></param>
+        /// <param name="apellido"></param>
+        /// <param name="edad"></param>
         public Cliente(int dni, string nombre, string apellido, int edad)
         {
             this.dni = dni;
@@ -83,6 +90,12 @@ namespace Biblioteca
             }
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo == en donde indicara si dos clientes son iguales.
+        /// </summary>
+        /// <param name="clienteUno"></param>
+        /// <param name="clienteDos"></param>
+        /// <returns></returns>
         public static bool operator ==(Cliente clienteUno, Cliente clienteDos)
         {
             bool iguales = false;
@@ -94,11 +107,22 @@ namespace Biblioteca
             return iguales;
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo != en donde indicara si dos clientes son distintos
+        /// </summary>
+        /// <param name="clienteUno"></param>
+        /// <param name="clienteDos"></param>
+        /// <returns></returns>
         public static bool operator !=(Cliente clienteUno, Cliente clienteDos)
         {
             return !(clienteUno == clienteDos);
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo Equals para una Cliente
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             bool equals = false;
@@ -110,11 +134,19 @@ namespace Biblioteca
             return equals;
         }
 
+        /// <summary>
+        /// Sobrecarga del método GetHashCode
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return (dni, apellido, edad).GetHashCode();
         }
 
+        /// <summary>
+        /// Sobrecarga del método ToString. Imprime los datos de un cliente
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

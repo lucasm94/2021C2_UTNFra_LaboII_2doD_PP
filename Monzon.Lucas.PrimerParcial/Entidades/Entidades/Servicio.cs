@@ -14,7 +14,7 @@ namespace Biblioteca
         protected DateTime? fin;
         protected float pago;
 
-        public Servicio(int dniCliente, DateTime inicio)
+        protected Servicio(int dniCliente, DateTime inicio)
         {
             this.id = GenerarId();
             this.dniCliente = dniCliente;
@@ -69,12 +69,20 @@ namespace Biblioteca
             }
         }
 
+        /// <summary>
+        /// Genera el Id de un Servicio
+        /// </summary>
+        /// <returns></returns>
         private string GenerarId()
         {
             int random = new Random().Next();
             return "S" + random.ToString() + "S";
         }
 
+        /// <summary>
+        /// Sobrecarga del método ToString. Imprime los datos del Servicio
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             string finStr = (this.fin == null) ? "No finalizo" : this.fin.ToString();

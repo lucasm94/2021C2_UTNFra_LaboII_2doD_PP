@@ -12,6 +12,14 @@ namespace Biblioteca.Entidades
         private string nroTelefonoDestino;
         private Enum.TipoLlamada tipoLlamada;
 
+        /// <summary>
+        /// Constructor con parametros de una llamada
+        /// </summary>
+        /// <param name="idTelefono"></param>
+        /// <param name="nroTelefonoDestino"></param>
+        /// <param name="tipoLlamada"></param>
+        /// <param name="dniCliente"></param>
+        /// <param name="inicio"></param>
         public Llamada(string idTelefono, string nroTelefonoDestino, Enum.TipoLlamada tipoLlamada, 
             int dniCliente, DateTime inicio) : base(dniCliente, inicio)
         {
@@ -52,6 +60,12 @@ namespace Biblioteca.Entidades
             }
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo == en donde indicara si dos llamadas son iguales.
+        /// </summary>
+        /// <param name="llamadaUno"></param>
+        /// <param name="llamadaDos"></param>
+        /// <returns></returns>
         public static bool operator ==(Llamada llamadaUno, Llamada llamadaDos)
         {
             bool iguales = false;
@@ -63,11 +77,22 @@ namespace Biblioteca.Entidades
             return iguales;
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo != en donde indicara si dos llamadas son distintas
+        /// </summary>
+        /// <param name="llamadaUno"></param>
+        /// <param name="llamadaDos"></param>
+        /// <returns></returns>
         public static bool operator !=(Llamada llamadaUno, Llamada llamadaDos)
         {
             return !(llamadaUno == llamadaDos);
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo Equals para una llamada
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             bool equals = false;
@@ -79,11 +104,19 @@ namespace Biblioteca.Entidades
             return equals;
         }
 
+        /// <summary>
+        /// Sobrecarga del método GetHashCode
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return (id, idTelefono, tipoLlamada).GetHashCode();
         }
 
+        /// <summary>
+        /// Sobrecarga del método ToString. Imprime los datos de la llamada
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -95,6 +128,10 @@ namespace Biblioteca.Entidades
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Sobrecarga del método CostoDeUso. calcula el costo de una llamada
+        /// </summary>
+        /// <returns></returns>
         public override float CostoDeUso()
         {
             float segundosQueSonMinutos;

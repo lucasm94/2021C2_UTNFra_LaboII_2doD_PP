@@ -10,6 +10,13 @@ namespace Biblioteca
     {
         private Dictionary<string, List<string>> necesita;
 
+        /// <summary>
+        /// Constructor con parametros de un cliente para computadoras
+        /// </summary>
+        /// <param name="dni"></param>
+        /// <param name="nombre"></param>
+        /// <param name="apellido"></param>
+        /// <param name="edad"></param>
         public ClienteComputadora(int dni, string nombre, string apellido, int edad) 
             : base(dni, nombre, apellido, edad)
         {
@@ -28,6 +35,12 @@ namespace Biblioteca
             }
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo == en donde indicara si dos clienteComputadora son iguales.
+        /// </summary>
+        /// <param name="clienteUno"></param>
+        /// <param name="clienteDos"></param>
+        /// <returns></returns>
         public static bool operator ==(ClienteComputadora clienteUno, ClienteComputadora clienteDos)
         {
             bool iguales = false;
@@ -49,11 +62,22 @@ namespace Biblioteca
             return iguales;
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo != en donde indicara si dos clientesComptuadora son distintas
+        /// </summary>
+        /// <param name="clienteUno"></param>
+        /// <param name="clienteDos"></param>
+        /// <returns></returns>
         public static bool operator !=(ClienteComputadora clienteUno, ClienteComputadora clienteDos)
         {
             return !(clienteUno == clienteDos);
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo Equals para un clienteComputadora
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             bool equals = false;
@@ -65,11 +89,19 @@ namespace Biblioteca
             return equals;
         }
 
+        /// <summary>
+        /// Sobrecarga del método GetHashCode
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return (dni, apellido, edad, necesita.Keys.Count).GetHashCode();
         }
 
+        /// <summary>
+        /// imprime que necesita un cliente compuradora
+        /// </summary>
+        /// <returns></returns>
         public string QueNecesita()
         {
             StringBuilder sb = new StringBuilder();
@@ -85,6 +117,10 @@ namespace Biblioteca
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Sobrecarga del método ToString. Imprime los datos de clientecomputadora
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

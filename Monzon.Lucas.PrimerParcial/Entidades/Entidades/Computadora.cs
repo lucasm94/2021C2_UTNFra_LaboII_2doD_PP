@@ -13,6 +13,14 @@ namespace Biblioteca
         private List<Enum.Juego> juegos;
         private Hardware hardware;
 
+        /// <summary>
+        /// Constructor con parametros de Computadora
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="softwares"></param>
+        /// <param name="perifericos"></param>
+        /// <param name="juegos"></param>
+        /// <param name="hardware"></param>
         public Computadora(string id, List<Enum.Software> softwares, List<Enum.Periferico> perifericos,
             List<Enum.Juego> juegos, Hardware hardware) : base (id)
         {
@@ -70,6 +78,12 @@ namespace Biblioteca
             }
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo == en donde indicara si dos computadoras son iguales.
+        /// </summary>
+        /// <param name="pcUno"></param>
+        /// <param name="pcDos"></param>
+        /// <returns></returns>
         public static bool operator ==(Computadora pcUno, Computadora pcDos)
         {
             bool iguales = false;
@@ -106,11 +120,22 @@ namespace Biblioteca
             return iguales;
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo != en donde indicara si dos computadoras son distintas
+        /// </summary>
+        /// <param name="pcUno"></param>
+        /// <param name="pcDos"></param>
+        /// <returns></returns>
         public static bool operator !=(Computadora pcUno, Computadora pcDos)
         {
             return !(pcUno == pcDos);
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo Equals para una Computadora
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             bool equals = false;
@@ -122,11 +147,19 @@ namespace Biblioteca
             return equals;
         }
 
+        /// <summary>
+        /// Sobrecarga del método GetHashCode
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return (id, enUso, minutosDeUsoTotales, hardware.Procesador).GetHashCode();
         }
 
+        /// <summary>
+        /// Sobrecarga del método ToString. Imprime los datos de la Computadora
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

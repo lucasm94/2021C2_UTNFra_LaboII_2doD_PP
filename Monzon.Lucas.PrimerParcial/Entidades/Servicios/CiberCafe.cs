@@ -23,6 +23,10 @@ namespace Biblioteca
         private Dictionary<Enum.Juego, Copia> copiaJuegos;
         private float gananciasPorCopias;
 
+        /// <summary>
+        /// Constructor de CiberCafe
+        /// inicializa lo requerido para que funcione el ciber.
+        /// </summary>
         public CiberCafe()
         {
             this.computadoras = Mocks.Computadoras();
@@ -71,6 +75,11 @@ namespace Biblioteca
             return softwaresPedidos;
         }
 
+        /// <summary>
+        /// Devuelve las computadoras del ciber y las filtra por si estan en uso o no.
+        /// </summary>
+        /// <param name="busqueda"></param>
+        /// <returns></returns>
         public List<Computadora> Computadoras(string busqueda)
         {
             List<Computadora> computadorasList = new List<Computadora>();
@@ -101,6 +110,11 @@ namespace Biblioteca
             return computadorasList;
         }
 
+        /// <summary>
+        /// Devuelve los telefonos del ciber y las filtra por si estan en uso o no.
+        /// </summary>
+        /// <param name="busqueda"></param>
+        /// <returns></returns>
         public List<Telefono> Telefonos(string busqueda)
         {
             List<Telefono> telefonos = new List<Telefono>();
@@ -171,6 +185,11 @@ namespace Biblioteca
             }
         }
 
+        /// <summary>
+        /// Devuelve la computadora con el Id ingresado como parametro.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Computadora GetComputadoraPorId(string id)
         {
             int i = 0;
@@ -190,23 +209,42 @@ namespace Biblioteca
             }
         }
 
+        /// <summary>
+        /// Asigna un telefono a un cliente.
+        /// Inicializa una llamada con el dni del cliente, el id del telefono y el numero a llamar.
+        /// </summary>
+        /// <param name="dniCliente"></param>
+        /// <param name="idTelefono"></param>
+        /// <param name="nroTelefono"></param>
         public void Asignar(int dniCliente, string idTelefono, string nroTelefono)
         {
             Enum.TipoLlamada tipo = ObtenerTipoLlamada(nroTelefono);
             Llamada llamada = new Llamada(idTelefono, nroTelefono, tipo, dniCliente, DateTime.Now);
-            ClienteEnEsperaACLienteAtendido(dniCliente);
+            ClienteEnEsperaAClienteUsandoServicio(dniCliente);
             ActualizarEstadoDispositivo(idTelefono, true, 0);
             Llamadas.Add(llamada);
         }
 
+        /// <summary>
+        /// Asigna un computadora a un cliente.
+        /// Inicializa una Maquina con el dni del cliente, el id de la computadora y el tiempo de reserva.
+        /// </summary>
+        /// <param name="dniCliente"></param>
+        /// <param name="idComputadora"></param>
+        /// <param name="tiempoReserva"></param>
         public void Asignar(int dniCliente, string idComputadora, Enum.TiempoReserva tiempoReserva)
         {
             Maquina maquina = new Maquina(idComputadora, tiempoReserva, dniCliente, DateTime.Now);
-            ClienteEnEsperaACLienteAtendido(dniCliente);
+            ClienteEnEsperaAClienteUsandoServicio(dniCliente);
             ActualizarEstadoDispositivo(idComputadora, true, 0);
             Maquinas.Add(maquina);
         }
 
+        /// <summary>
+        /// Devuelve el indice del cliente en espera.
+        /// </summary>
+        /// <param name="dniCliente"></param>
+        /// <returns></returns>
         private int ObtenerIndiceClienteEnEspera(int dniCliente)
         {
             int i = 0;
@@ -217,7 +255,11 @@ namespace Biblioteca
             return i;
         }
 
-        private void ClienteEnEsperaACLienteAtendido(int dniCliente)
+        /// <summary>
+        /// Actualiza un cliente en espera a cliente usando un servicio.
+        /// </summary>
+        /// <param name="dniCliente"></param>
+        private void ClienteEnEsperaAClienteUsandoServicio(int dniCliente)
         {
             int index = ObtenerIndiceClienteEnEspera(dniCliente);
             Cliente cliente = ClientesEnEspera[index];
@@ -226,6 +268,11 @@ namespace Biblioteca
             ClientesUsandoServicio.Add(cliente);
         }
 
+        /// <summary>
+        /// Actualiza un cliente que esta usando un servicio a cliente atendido.
+        /// Inicializa una llamada con el dni del cliente, el id del telefono y el numero a llamar.
+        /// </summary>
+        /// <param name="dniCliente"></param>
         private void ClienteUsandoServicioACLienteAtendido(int dniCliente)
         {
             int i = 0;
@@ -238,6 +285,11 @@ namespace Biblioteca
             ClientesAtendidos.Add(cliente);
         }
 
+        /// <summary>
+        /// Devuelve el tipo de llamada dependiendo del numero ingresado.
+        /// </summary>
+        /// <param name="numero"></param>
+        /// <returns></returns>
         private Enum.TipoLlamada ObtenerTipoLlamada(string numero)
         {
             Enum.TipoLlamada tipo;
@@ -256,6 +308,13 @@ namespace Biblioteca
             return tipo;
         }
 
+        /// <summary>
+        /// Actualiza el estado de un dispositivo y los minutos de uso.
+        /// </summary>
+        /// <param name="idDispositivo"></param>
+        /// <param name="enUso"></param>
+        /// <param name="minutos"></param>
+        /// <returns></returns>
         private void ActualizarEstadoDispositivo(string idDispositivo, bool enUso, int minutos)
         {
             int i = 0;
@@ -284,6 +343,13 @@ namespace Biblioteca
             }
         }
 
+        /// <summary>
+        /// Devuelve el servicio finalizado que luego se le informara al cliente.
+        /// Finaliza el uso de un servicio.
+        /// </summary>
+        /// <param name="dniCliente"></param>
+        /// <param name="tipoServicio"></param>
+        /// <returns></returns>
         public ServicioFinalizadoInfo FinalizarUso(int dniCliente, string tipoServicio)
         {
             Servicio servicio = ObtenerServicioSinFinalizar(dniCliente, tipoServicio);
@@ -297,16 +363,29 @@ namespace Biblioteca
             return new ServicioFinalizadoInfo(minutosUso, monto, iva, (float)Math.Round(monto+iva, 2));
         }
 
+        /// <summary>
+        /// Devuelve las computadoras ordenadas por minuto de uso en manera descendente.
+        /// </summary>
+        /// <returns></returns>
         public List<Computadora> ComputadorasOrdenadasMinDeUsoDesc()
         {
             return this.computadoras.OrderByDescending(c => c.MinutosDeUsoTotales).ToList();
         }
 
+        /// <summary>
+        /// Devuelve los telefonos ordenados por minuto de uso en manera descendente.
+        /// </summary>
+        /// <returns></returns>
         public List<Telefono> TelefonosOrdenadosMinDeUsoDesc()
         {
             return this.telefonos.OrderByDescending(c => c.MinutosDeUsoTotales).ToList();
         }
 
+        /// <summary>
+        /// Devuelve las ganancias por servicio.
+        /// </summary>
+        /// <param name="servicio"></param>
+        /// <returns></returns>
         public float GananciasTotalesPorServicio(string servicio)
         {
             float ganancias = 0f;
@@ -326,6 +405,11 @@ namespace Biblioteca
             return ganancias;
         }
 
+        /// <summary>
+        /// Devuelve las horas totales por tipo de llamada.
+        /// </summary>
+        /// <param name="tipo"></param>
+        /// <returns></returns>
         public int HorasTotalesPorTipoLlamada(string tipo)
         {
             int horasTotales = 0;
@@ -358,6 +442,11 @@ namespace Biblioteca
             return horasTotales;
         }
 
+        /// <summary>
+        /// Devuelve la recaudacion por tipo de llamada.
+        /// </summary>
+        /// <param name="tipo"></param>
+        /// <returns></returns>
         public float RecaudacionTotalPorTipoLlamada(string tipo)
         {
             float recaudacionTotal = 0f;
@@ -389,6 +478,10 @@ namespace Biblioteca
             return reacudacionTotal;
         }
 
+        /// <summary>
+        /// Devuelve el software mas pedido.
+        /// </summary>
+        /// <returns></returns>
         public string SoftwareMasPedidos()
         {
             int maxPedido = this.softwaresPedidos.Values.Max();
@@ -401,6 +494,10 @@ namespace Biblioteca
             return "";
         }
 
+        /// <summary>
+        /// Devuelve el periferico mas pedido.
+        /// </summary>
+        /// <returns></returns>
         public string PerifericoMasPedidos()
         {
             int maxPedido = this.perifericosPedidos.Values.Max();
@@ -413,6 +510,10 @@ namespace Biblioteca
             return "";
         }
 
+        /// <summary>
+        /// Devuelve el juego mas pedido.
+        /// </summary>
+        /// <returns></returns>
         public string JuegoMasPedidos()
         {
             int maxPedido = this.juegosPedidos.Values.Max();
@@ -425,6 +526,12 @@ namespace Biblioteca
             return "";
         }
 
+        /// <summary>
+        /// Realiza la copia de un juego la cantidad de veces pedida.
+        /// </summary>
+        /// <param name="juego"></param>
+        /// <param name="cantidad"></param>
+        /// <returns></returns>
         public void CopiarJuegoACd(Enum.Juego juego, int cantidad)
         {
             float ganancia = (float)(cantidad * 1.25);
@@ -440,11 +547,20 @@ namespace Biblioteca
             this.gananciasPorCopias += ganancia;
         }
 
+        /// <summary>
+        /// Devuelve ganancias por copias realizadas.
+        /// </summary>
+        /// <returns></returns>
         public float ObtenerGananciasPorCopiasRealizadas()
         {
             return this.gananciasPorCopias;
         }
 
+        /// <summary>
+        /// Devuelve copias por juego.
+        /// </summary>
+        /// <param name="juego"></param>
+        /// <returns></returns>
         public Copia ObtenerInfoDeCopiaDeUnJuego(Enum.Juego juego)
         {
             if (this.copiaJuegos.Count > 0 && this.copiaJuegos[juego] != null)
@@ -454,11 +570,22 @@ namespace Biblioteca
             return new Copia();
         }
 
+        /// <summary>
+        /// Devuelve el servicio por el cliente.
+        /// </summary>
+        /// <param name="cliente"></param>
+        /// <returns></returns>
         public string ServicioQueNecesita(Cliente cliente)
         {
             return cliente is ClienteComputadora ? Constantes.COMPUTADORA : Constantes.CABINA;
         }
 
+        /// <summary>
+        /// Devuelve el servicio sin finalizar por dni del cliente y el tipo.
+        /// </summary>
+        /// <param name="dniCliente"></param>
+        /// <param name="tipoServicio"></param>
+        /// <returns></returns>
         public Servicio ObtenerServicioSinFinalizar(int dniCliente, string tipoServicio)
         {
             Servicio servicio = null;
@@ -486,6 +613,10 @@ namespace Biblioteca
             return servicio;
         }
 
+        /// <summary>
+        /// Actualiza lo mas pedidos.
+        /// </summary>
+        /// <param name="necesita"></param>
         public void ActualizarMasPedidos(Dictionary<string, List<string>> necesita)
         {
             foreach (string key in necesita.Keys)

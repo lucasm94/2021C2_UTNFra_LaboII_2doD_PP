@@ -11,6 +11,13 @@ namespace Biblioteca.Entidades
         private string idComputadora;
         private Enum.TiempoReserva tiempoReserva;
 
+        /// <summary>
+        /// Constructor con parametros de una Maquina
+        /// </summary>
+        /// <param name="idComputadora"></param>
+        /// <param name="tiempoReserva"></param>
+        /// <param name="dniCliente"></param>
+        /// <param name="inicio"></param>
         public Maquina(string idComputadora, Enum.TiempoReserva tiempoReserva, int dniCliente, 
             DateTime inicio) : base(dniCliente, inicio)
         {
@@ -34,6 +41,12 @@ namespace Biblioteca.Entidades
             }
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo == en donde indicara si dos Maquinas son iguales.
+        /// </summary>
+        /// <param name="maquinaUno"></param>
+        /// <param name="maquinaDos"></param>
+        /// <returns></returns>
         public static bool operator ==(Maquina maquinaUno, Maquina maquinaDos)
         {
             bool iguales = false;
@@ -45,11 +58,22 @@ namespace Biblioteca.Entidades
             return iguales;
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo != en donde indicara si dos maquinas son distintas
+        /// </summary>
+        /// <param name="maquinaUno"></param>
+        /// <param name="maquinaDos"></param>
+        /// <returns></returns>
         public static bool operator !=(Maquina maquinaUno, Maquina maquinaDos)
         {
             return !(maquinaUno == maquinaDos);
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo Equals para una Maquina
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             bool equals = false;
@@ -61,11 +85,19 @@ namespace Biblioteca.Entidades
             return equals;
         }
 
+        /// <summary>
+        /// Sobrecarga del método GetHashCode
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return (id, idComputadora, tiempoReserva).GetHashCode();
         }
 
+        /// <summary>
+        /// Sobrecarga del método ToString. Imprime los datos de la Maquina
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -76,6 +108,10 @@ namespace Biblioteca.Entidades
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Sobrecarga del método CostoDeUso. calcula el costo de una maquina
+        /// </summary>
+        /// <returns></returns>
         public override float CostoDeUso()
         {
             double minutosDeUso = (this.Fin - this.Inicio).TotalSeconds;

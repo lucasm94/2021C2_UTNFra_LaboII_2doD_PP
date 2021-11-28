@@ -13,6 +13,13 @@ namespace Biblioteca
         private Enum.PlacaDeVideo placaDeVideo;
         private Enum.DiscoDuro discoDuro;
 
+        /// <summary>
+        /// Constructor con parametros de Hardware
+        /// </summary>
+        /// <param name="procesador"></param>
+        /// <param name="ram"></param>
+        /// <param name="placaDeVideo"></param>
+        /// <param name="discoDuro"></param>
         public Hardware(Enum.Procesador procesador, Enum.Ram ram, Enum.PlacaDeVideo placaDeVideo,
             Enum.DiscoDuro discoDuro)
         {
@@ -70,6 +77,12 @@ namespace Biblioteca
             }
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo == en donde indicara si dos hardwares son iguales.
+        /// </summary>
+        /// <param name="hardwareUno"></param>
+        /// <param name="hardwareDos"></param>
+        /// <returns></returns>
         public static bool operator ==(Hardware hardwareUno, Hardware hardwareDos)
         {
             bool iguales = false;
@@ -82,11 +95,22 @@ namespace Biblioteca
             return iguales;
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo != en donde indicara si dos hardwares son distintas
+        /// </summary>
+        /// <param name="hardwareUno"></param>
+        /// <param name="hardwareDos"></param>
+        /// <returns></returns>
         public static bool operator !=(Hardware hardwareUno, Hardware hardwareDos)
         {
             return !(hardwareUno == hardwareDos);
         }
 
+        /// <summary>
+        /// Sobrecarga del metodo Equals para un hardware
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj)
         {
             bool equals = false;
@@ -98,11 +122,19 @@ namespace Biblioteca
             return equals;
         }
 
+        /// <summary>
+        /// Sobrecarga del método GetHashCode
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode()
         {
             return (procesador, ram, placaDeVideo, discoDuro).GetHashCode();
         }
 
+        /// <summary>
+        /// Sobrecarga del método ToString. Imprime los datos de Hardware
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
